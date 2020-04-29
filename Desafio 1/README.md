@@ -1,8 +1,14 @@
 # Desafio #1 - Arena de Batalha
 
+<p align = 'center' >
+<img src  = 'https://i.imgur.com/ODvndkv.png' >
+</p>
+
 ## Contexto
 
+<p align = 'center' >
 <img style = 'height: 300px' src = 'https://66.media.tumblr.com/tumblr_lgnfh6PFWV1qfyz1jo1_400.jpg'>
+</p>
 
 Uma manada de `porygon` famintos se infiltrou no github do `ucl-sanca` e destruiu o código em produção do jogo favorito dos membros: `Pokémon`, por meio de `commits` não testados. 
 
