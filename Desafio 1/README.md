@@ -8,7 +8,7 @@ Uma manada de `porygon` famintos se infiltrou no github do `ucl-sanca` e destrui
 
 **Ajude o Codelab a ter seu jogo de volta e acumule pontos para a premiação!** 
 
-Felizmente, o jogador mais assíduo do grupo, @Baneling, salvou uma `copia pirateada` do jogo em seu <a href = 'site pessoal'> Site pessoal </a>, o que pode te ajudar a entender como o saudoso jogo funcionava. Entretanto, a cópia é de uma versão antiga, que não possui todas as funcionalidades.
+Felizmente, o jogador mais assíduo do grupo, @Baneling, salvou uma `copia pirateada` do jogo em seu <a href = 'https://pokemon-codelab.netlify.app/'> Site pessoal </a>, o que pode te ajudar a entender como o saudoso jogo funcionava. Entretanto, a cópia é de uma versão antiga, que não possui todas as funcionalidades.
 
 - **Desafio 1:** Implemente as funções `playerAttack()` e `opponentAttack()` em ex.js para que o jogo volte a funcionar!
 - **Desafio Bonus 1:**  Modifique o css, imagens, nomes e nomes de golpes à seu próprio gosto! Seu jogo não precisa ser sobre Pokemon, pode ser uma batalha de Digimons, Ratos de desenhos animados, Rinha de Cursos... **Coloque sua criatividade em prática!**
