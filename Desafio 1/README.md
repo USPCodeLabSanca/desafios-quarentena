@@ -23,6 +23,9 @@ Felizmente, o jogador mais assíduo do grupo, @Baneling, salvou uma `copia pirat
 - **Desafio Bonus 4:** Faça com que seus personagens evoluam e ganhem novos golpes para um Segundo Round ainda mais emocionante!
 - **Desafio Bonus 5:** Re-fatore o código utilizando **classes** (funcionais ou do ES6) que agreguem a um Pokemon seus atributos e métodos cabíveis. 
 
+.1 Materiais de apoio sobre HTML, CSS e JS: 
+  - <a href = 'https://ucl-sanca.xyz/Web-Development-Studies'>Material JS treinamento Semcomp</a>
+  - <a href = 'ucl-sanca.xyz/aulas-codelab'> Aulas do Codeleb 2019.2 </a>
 ## Entrega
 Zipe seus arquivos e envie no <a href = 'https://docs.google.com/forms/d/1ljOt27oKOCbR242ik5aSUvtXMUobOkM3pwnEFTLAV3s/edit?usp=sharing'> Forms </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal e nos envie o link! Ou então, realize o **Desafio bonus 6**. 
 
@@ -31,5 +34,5 @@ Zipe seus arquivos e envie no <a href = 'https://docs.google.com/forms/d/1ljOt27
 
 <img src = 'https://i.imgur.com/iVKebc7.png'> 
 
-Aprenda sobre <a href = 'https://www.youtube.com/watch?v=r9Kauz9B4i8'>git</a>, desenvolva seu projeto em seu repositório e nos envie o link dele no formulário! 
+Aprenda sobre <a href = 'https://www.youtube.com/watch?v=r9Kauz9B4i8'>git (material de apoio)</a>, desenvolva seu projeto em seu repositório e nos envie o link dele no formulário! 
 
