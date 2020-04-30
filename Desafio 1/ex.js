@@ -4,7 +4,7 @@ let playerHp = 274;
 
 const opponentHpElement = document.getElementById('opponent-health');
 const opponentTotalHp = 292;
-let opponentHp = 292;
+let opponentHp = 2920;
 
 const turnText = document.getElementById('text');
 let isTurnHappening = false;
@@ -128,7 +128,7 @@ function playerAttack(attack) {
 // opponent attack function that receives the used attack
 function opponentAttack(attack) {
   // 0: return false if attack misses
-  
+
   // 1: otherwise update player health and return true
 }
 
