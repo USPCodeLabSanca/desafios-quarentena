@@ -31,5 +31,5 @@ Zipe seus arquivos e envie no <a href = 'https://docs.google.com/forms/d/1ljOt27
 
 <img src = 'https://i.imgur.com/iVKebc7.png'> 
 
-Aprenda sobre <a href = 'https://www.youtube.com/watch?v=r9Kauz9B4i8'>git</a>, desenvovle seu projeto em seu repositório e nos envie o link dele no formulário! 
+Aprenda sobre <a href = 'https://www.youtube.com/watch?v=r9Kauz9B4i8'>git</a>, desenvolva seu projeto em seu repositório e nos envie o link dele no formulário! 
 
