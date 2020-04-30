@@ -24,8 +24,12 @@ Felizmente, o jogador mais assíduo do grupo, @Baneling, salvou uma `copia pirat
 - **Desafio Bonus 5:** Re-fatore o código utilizando **classes** (funcionais ou do ES6) que agreguem a um Pokemon seus atributos e métodos cabíveis. 
 
 ## Entrega
-Zipe seus arquivos e envie no <a href = 'https://docs.google.com/forms/d/1ljOt27oKOCbR242ik5aSUvtXMUobOkM3pwnEFTLAV3s/edit?usp=sharing'> Forms </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal ou github e envie o link no último campo do formulário. 
+Zipe seus arquivos e envie no <a href = 'https://docs.google.com/forms/d/1ljOt27oKOCbR242ik5aSUvtXMUobOkM3pwnEFTLAV3s/edit?usp=sharing'> Forms </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal e nos envie o link! Ou então, realize o **Desafio bonus 6**. 
 
-- **Desafio bonus 6:** Realize um <a href = 'https://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/'>fork</a> no <a href = 'https://github.com/USPCodeLabSanca/desafios-quarentena'>nosso projeto do github</a>, crie uma branch para sua solução e faça um pull-request para que seu código seja adicionado ao nosso repositório!
+- **Desafio bonus 6:** Crie um Github. Realize um `fork` no <a href = 'https://github.com/USPCodeLabSanca/desafios-quarentena'>nosso projeto do github</a> para assim criar uma cópia do mesmo na sua conta. 
 
+
+<img src = 'https://i.imgur.com/iVKebc7.png'> 
+
+Aprenda sobre <a href = 'https://www.youtube.com/watch?v=r9Kauz9B4i8'>git</a>, desenvovle seu projeto em seu repositório e nos envie o link dele no formulário! 
 
