@@ -1,4 +1,6 @@
 const playerHpElement = document.getElementById('player-health');
+// let playerButtonLevel2 = document.getElementsByClassName('level-2').style.display = 'none';
+// let playerButtonLevel3 = document.getElementById('level-3');
 const playerTotalHp = 274;
 let playerHp = 274;
 
@@ -9,58 +11,70 @@ let opponentHp = 292;
 const turnText = document.getElementById('text');
 let isTurnHappening = false;
 
-const playerAttacks = {
-  thunderShock: {
-    power: 40,
-    accuracy: 100,
-    name: 'Thunder Shock',
-    type: 'electric',
-  },
-  quickAttack: {
-    power: 40,
-    accuracy: 100,
-    name: 'Quick Attack',
-    type: 'normal',
-  },
-  thunder: {
-    power: 110,
-    accuracy: 70,
-    name: 'Thunder',
-    type: 'electric',
-  },
-  submission: {
-    power: 80,
-    accuracy: 80,
-    name: 'Submission',
-    type: 'fighting',
+const playerChampion = {
+  level: 1,
+  role: 'earth',
+  attacks: {
+    fastPunch: {
+      power: 40,
+      accuracy: 100,
+      name: 'Fast Punch',
+      type: 'electric',
+    },
+    splintersKick: {
+      power: 40,
+      accuracy: 100,
+      name: 'Splinters Kick',
+      type: 'normal',
+    },
+    thunder: {
+      power: 110,
+      accuracy: 70,
+      name: 'Thunder',
+      type: 'eletric',
+      shock: false,
+    },
+    backFlip: {
+      power: 80,
+      accuracy: 80,
+      name: 'Back Flip',
+      type: 'normal',
+    }
   }
+  
 }
 
-const opponentAttacks = {
-  tackle: {
-    power: 40,
-    accuracy: 100,
-    name: 'Tackle',
-    type: 'normal',
-  },
-  bubble: {
-    power: 40,
-    accuracy: 100,
-    name: 'Bubble',
-    type: 'water',
-  },
-  waterGun: {
-    power: 40,
-    accuracy: 100,
-    name: 'Water Gun',
-    type: 'water',
-  },
-  hydroPump: {
-    power: 110,
-    accuracy: 80,
-    name: 'Hydro Pump',
-    type: 'water',
+const opponentChampion = {
+  level: 1,
+  role: 'water',
+  turnsToGo: 0,
+  attacks: {
+    tackle: {
+      power: 40,
+      accuracy: 100,
+      name: 'Tackle',
+      type: 'normal',
+    },
+    bubble: {
+      power: 40,
+      accuracy: 100,
+      name: 'Bubble',
+      type: 'water',
+    },
+    waterGun: {
+      power: 40,
+      accuracy: 100,
+      name: 'Water Gun',
+      type: 'water',
+    },
+    hydroPump: {
+      power: 110,
+      accuracy: 80,
+      name: 'Hydro Pump',
+      type: 'water',
+    }
   }
+  
 }
 
 function gameOver (winner) {
@@ -116,6 +130,29 @@ function updateOpponentHp(newHP) {
 function playerAttack(attack) {
   // 0: return false if attack misses
   // 1: otherwise update opponents health and return true
+  if(!willAttackMiss(attack.accuracy)) {
+    updateOpponentHp(opponentHp - attack.power);
+
+    if (attack.type === 'eletric' && opponentChampion.role === 'water') {
+      //40% bonus by eletric attacks against water opponents
+      attack.power *= 1.4;
+    }
+
+    if (attack.name === 'Thunder') {
+      let thundershock = Math.floor(Math.random() * 5);
+      if (thundershock >= 2) {
+        //stun the opponent for 2 rounds if thundershock has value 4 ou 5
+        opponentChampion.turnsToGo = 2;
+        playerChampion.attacks.thunder.shock = true;
+      }
+    }
+    
+    playerChampion.level += 1;
+    return true;
+  }
+
+  return false;
+  
 }
 
 
@@ -128,13 +165,18 @@ function playerAttack(attack) {
 // opponent attack function that receives the used attack
 function opponentAttack(attack) {
   // 0: return false if attack misses
-  
   // 1: otherwise update player health and return true
+  if(!willAttackMiss(attack.accuracy)) {
+    updatePlayerHp(playerHp - attack.power);
+    return true;
+  }
+
+  return false;
 }
 
 function chooseOpponentAttack () {
   // Put all opponents attacks in a array
-  const possibleAttacks = Object.values(opponentAttacks);
+  const possibleAttacks = Object.values(opponentChampion.attacks);
 
   // Randomly chooses one attack from the array
   return possibleAttacks[Math.floor(Math.random() * possibleAttacks.length)];
@@ -151,6 +193,9 @@ function turn(playerChosenAttack) {
 
   // Update HTML text with the used attack
   turnText.innerText = 'Player used ' + playerChosenAttack.name;
+  if (didPlayerHit && playerChosenAttack.name === 'Thunder' && playerChosenAttack.shock === true) {
+    turnText.innerHTML += '<br />Opponent stunned for the 2 next rounds'
+  }
 
   // Update HTML text in case the attack misses
   if (!didPlayerHit) {
@@ -159,17 +204,22 @@ function turn(playerChosenAttack) {
 
   // Wait 2000ms to execute opponent attack (Player attack animation time)
   setTimeout(() => {
-    // Randomly chooses opponents attack
-    const opponentChosenAttack = chooseOpponentAttack();
+    //opponentChampion.turnstoGo != 0 when stunned
+    if (opponentChampion.turnsToGo === 0) {
+      // Randomly chooses opponents attack
+      const opponentChosenAttack = chooseOpponentAttack();
 
-    const didOpponentHit = opponentAttack(opponentChosenAttack);
+      const didOpponentHit = opponentAttack(opponentChosenAttack);
 
-    // Update HTML text with the used attack
-    turnText.innerText = 'Opponent used ' + opponentChosenAttack.name;
+      // Update HTML text with the used attack
+      turnText.innerText = 'Opponent used ' + opponentChosenAttack.name;
 
-    // Update HTML text in case the attack misses
-    if (!didOpponentHit) {
-      turnText.innerText += ', but missed!';
+      // Update HTML text in case the attack misses
+      if (!didOpponentHit) {
+        turnText.innerText += ', but missed!';
+      }
+    } else {
+      opponentChampion.turnsToGo -= 1;
     }
 
     // Wait 2000ms to end the turn (Opponent attack animation time)
@@ -182,15 +232,15 @@ function turn(playerChosenAttack) {
 }
 
 // Set buttons click interaction
-document.getElementById('thunder-shock-button').addEventListener('click', function() {
-  turn(playerAttacks.thunderShock);
+document.getElementById('fast-punch-button').addEventListener('click', function() {
+  turn(playerChampion.attacks.fastPunch);
 });
-document.getElementById('quick-attack-button').addEventListener('click', function() {
-  turn(playerAttacks.quickAttack);
+document.getElementById('splinters-kick-button').addEventListener('click', function() {
+  turn(playerChampion.attacks.splintersKick);
 });
 document.getElementById('thunder-button').addEventListener('click', function() {
-  turn(playerAttacks.thunder);
+  turn(playerChampion.attacks.thunder);
 });
-document.getElementById('submission-button').addEventListener('click', function() {
-  turn(playerAttacks.submission);
+document.getElementById('back-flip-button').addEventListener('click', function() {
+  turn(playerChampion.attacks.backFlip);
 });
