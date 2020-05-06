@@ -1,4 +1,6 @@
 const playerHpElement = document.getElementById('player-health');
+const playerLevelElement = document.querySelector('#player-level');
+const opponentLevelElement = document.querySelector('#opponent-level');
 // let playerButtonLevel2 = document.getElementsByClassName('level-2').style.display = 'none';
 // let playerButtonLevel3 = document.getElementById('level-3');
 const playerTotalHp = 274;
@@ -140,7 +142,7 @@ function playerAttack(attack) {
 
     if (attack.name === 'Thunder') {
       let thundershock = Math.floor(Math.random() * 5);
-      if (thundershock >= 2) {
+      if (thundershock >= 4) {
         //stun the opponent for 2 rounds if thundershock has value 4 ou 5
         opponentChampion.turnsToGo = 2;
         playerChampion.attacks.thunder.shock = true;
@@ -168,6 +170,8 @@ function opponentAttack(attack) {
   // 1: otherwise update player health and return true
   if(!willAttackMiss(attack.accuracy)) {
     updatePlayerHp(playerHp - attack.power);
+
+    opponentChampion.level += 1;
     return true;
   }
 
@@ -191,17 +195,20 @@ function turn(playerChosenAttack) {
 
   const didPlayerHit = playerAttack(playerChosenAttack);
 
-  // Update HTML text with the used attack
+  // Updates HTML text with the used attack
   turnText.innerText = 'Player used ' + playerChosenAttack.name;
   if (didPlayerHit && playerChosenAttack.name === 'Thunder' && playerChosenAttack.shock === true) {
     turnText.innerHTML += '<br />Opponent stunned for the 2 next rounds'
   }
 
-  // Update HTML text in case the attack misses
+  // Updates HTML text in case the attack misses
   if (!didPlayerHit) {
     turnText.innerText += ', but missed!';
   }
 
+  //Updates player's level 
+  playerLevelElement.innerText = 'Level: ' + playerChampion.level;
+  
   // Wait 2000ms to execute opponent attack (Player attack animation time)
   setTimeout(() => {
     //opponentChampion.turnstoGo != 0 when stunned
@@ -221,6 +228,8 @@ function turn(playerChosenAttack) {
     } else {
       opponentChampion.turnsToGo -= 1;
     }
+
+    opponentLevelElement.innerText = 'Level: ' + opponentChampion.level;
 
     // Wait 2000ms to end the turn (Opponent attack animation time)
     setTimeout(() => {
