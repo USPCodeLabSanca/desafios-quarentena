@@ -59,7 +59,6 @@ const playerChampion = {
       type: 'normal'
     }
   }
-  
 }
 
 const opponentChampion = {
@@ -92,7 +91,6 @@ const opponentChampion = {
       type: 'water',
     }
   }
-  
 }
 
 function gameOver (winner) {
