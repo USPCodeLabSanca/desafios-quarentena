@@ -22,7 +22,7 @@ Felizmente, as alterações feitas ainda não foram para produção e o jogo com
   - <a href = 'https://ucl-sanca.xyz/Web-Development-Studies'>Material JS treinamento Semcomp</a>
   - <a href = 'https://ucl-sanca.xyz/aulas-codelab'> Aulas do Codeleb 2019.2 </a>
 ## Entrega
-Zipe seus arquivos e envie no <a href = 'https://forms.gle/Dxgup3w1ECknsQgJ6'> Form </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal e nos envie o link! Ou então, realize o **Desafio bonus 6**. 
+Zipe seus arquivos e envie no <a href = 'https://forms.gle/Dxgup3w1ECknsQgJ6'> Form </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal e nos envie o link! Ou então, realize o **Desafio bonus 5**. 
 
 - **Desafio bonus 5:** Crie um Github. Realize um `fork` no <a href = 'https://github.com/USPCodeLabSanca/desafios-quarentena'>nosso projeto do github</a> para assim criar uma cópia do mesmo na sua conta. 
 
