@@ -10,13 +10,13 @@ Alguns jogadores de `campo minado` estavam muito aborrecidos por estarem sempre 
 
 **Ajude o Codelab a ter seu jogo de volta e acumule pontos para a premiação!** 
 
-Felizmente, as alterações feitas ainda não foram para produção e o jogo completo ainda está no ar <a href = 'https://minesweeper-codelab.netlify.app/' >aqui</a>. Corra para desfazer as mudanças antes que o jogo se perca para sempre!
+Felizmente, as alterações feitas ainda não foram para produção e o jogo completo continua no ar <a href = 'https://minesweeper-codelab.netlify.app/' >aqui</a>. Corra para desfazer as mudanças antes que o jogo se perca para sempre!
 
 - **Desafio 1:** Implemente a função `toggleFlag()` em main.js para que o jogo volte a funcionar!
-- **Desafio Bonus 1:** Implemente vidas! Dê mais de uma chance para que as pessoas explodam
-- **Desafio Bonus 2:** Crie uma outra página com um menu com níveis. Cada nível tem uma quantidade de bombas diferente.
+- **Desafio Bonus 1:** Implemente vidas! Dê mais de uma chance para que os jogadores explodam.
+- **Desafio Bonus 2:** Crie uma outra página com um menu de níveis. Cada nível tem uma quantidade de bombas diferente.
 - **Desafio Bonus 3:** Faça com que seja possível saber se as bandeiras colocadas estavam em lugares certos.
-- **Desafio Bonus 4:** Adicione tamanhos diferentes para o campo minado no menu!
+- **Desafio Bonus 4:** Adicione tamanhos diferentes para o campo minado no menu.
 
 .1 Materiais de apoio sobre HTML, CSS e JS: 
   - <a href = 'https://ucl-sanca.xyz/Web-Development-Studies'>Material JS treinamento Semcomp</a>
