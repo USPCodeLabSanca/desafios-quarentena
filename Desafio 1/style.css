@@ -117,6 +117,19 @@ button {
   margin: 0;
 }
 
+div .para {
+  padding: 3px;
+  margin: auto;
+}
+
+#pharse {
+  text-align: center;
+  font-size: 30px;
+  display: none;
+  background-color: bisque;
+
+}
+
 #options {
   background-color: var(--orange);
   margin: 16px 0;
