@@ -1,8 +1,12 @@
 const playerHpElement = document.getElementById('player-health');
 const playerLevelElement = document.querySelector('#player-level');
 const opponentLevelElement = document.querySelector('#opponent-level');
-// let playerButtonLevel2 = document.getElementsByClassName('level-2').style.display = 'none';
-// let playerButtonLevel3 = document.getElementById('level-3');
+let playerLvl3Button = document.querySelector('#lvl3-button');
+let playerLvl4Button = document.querySelector('#lvl4-button');
+
+playerLvl3Button.style.display = 'none';
+playerLvl4Button.style.display = 'none';
+
 const playerTotalHp = 274;
 let playerHp = 274;
 
@@ -41,6 +45,18 @@ const playerChampion = {
       accuracy: 80,
       name: 'Back Flip',
       type: 'normal',
+    },
+    shuriken: {
+      power: 90,
+      accuracy: 90,
+      name: 'Shuriken',
+      type: 'normal'
+    },
+    nunchaku: {
+      power: 50,
+      accuracy: 70,
+      name: 'Nunchaku',
+      type: 'normal'
     }
   }
   
@@ -208,6 +224,11 @@ function turn(playerChosenAttack) {
 
   //Updates player's level 
   playerLevelElement.innerText = 'Level: ' + playerChampion.level;
+  if (playerChampion.level == 3) {
+    playerLvl3Button.style.display = 'block';
+  } else if (playerChampion.level >= 4) {
+    playerLvl4Button.style.display = 'block';
+  }
   
   // Wait 2000ms to execute opponent attack (Player attack animation time)
   setTimeout(() => {
@@ -252,4 +273,10 @@ document.getElementById('thunder-button').addEventListener('click', function() {
 });
 document.getElementById('back-flip-button').addEventListener('click', function() {
   turn(playerChampion.attacks.backFlip);
+});
+document.getElementById('lvl3-button').addEventListener('click', function() {
+  turn(playerChampion.attacks.shuriken);
+});
+document.getElementById('lvl4-button').addEventListener('click', function() {
+  turn(playerChampion.attacks.nunchaku);
 });
