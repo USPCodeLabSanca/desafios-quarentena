@@ -9,10 +9,14 @@ const CellColors = [
 	'black',
 ];
 
+// Cell class declaration
 class Cell {
 	constructor (root, x, y, map) {
+    // Create a div element
 		const element = document.createElement('div');
+    // Add class cell and hidden to the created div element
 		element.classList.add('cell', 'hidden');
+    // Append div on root element
 		root.appendChild(element);
 
 		element.addEventListener('click', () => map.cellLeftClick(this));
@@ -33,6 +37,7 @@ class Cell {
 
 	reveal () {
 		if (this.visited) return;
+    // Replace class hidden with class revealed on the div element
 		this.element.classList.replace('hidden', 'revealed');
 		if (this.isBomb) {
 			this.element.classList.add('bomb');
@@ -43,14 +48,13 @@ class Cell {
 		this.visited = true;
 	}
 
-	toggleFlag () {
-		if (this.isFlagged) {
-			this.element.classList.remove('flag');
-		} else {
-			this.element.classList.add('flag');
-		}
-		this.isFlagged = !this.isFlagged;
-	}
+  // *************************************************************************************
+  // Here you need to implement toggleFlag function that depending on isFlagged variable
+  // will apply or remove the css class 'flag' from the this instantite element
+  // and will invert the flag
+  // (This function is called inside cellRightClick function that are in the Map class,
+  // you dont need to worry with that)
+  // *************************************************************************************
 }
 
 class Map {
@@ -73,13 +77,13 @@ class Map {
 		root.style.gridTemplateColumns = `repeat(${width}, max-content)`;
 	}
 
-	// used to verify if the given position is outside the map bounds
+	// Used to verify if the given position is outside the map bounds
 	doesPositionExist (x, y) {
 		if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
 		return true;
 	}
 
-	// iterates over each neighbor of a cell, calling `callback` with a cell as argument.
+	// Iterates over each neighbor of a cell, calling `callback` with a cell as argument.
 	forEachNeighbor (cell, callback) {
 		for (let newY = cell.y - 1; newY <= cell.y + 1; newY ++) {
 			for (let newX = cell.x - 1; newX <= cell.x + 1; newX ++) {
@@ -176,4 +180,5 @@ class Map {
 	}
 }
 
+// Instantiate a Map object
 new Map(document.getElementById('root'), 50, 30, 300);
