@@ -70,6 +70,13 @@ button {
   z-index: 1;
 }
 
+#squirtle img.squirtle_1{
+  width: 60%;
+  width: 50;
+  position: relative;
+  z-index: 1;
+}
+
 #opponent-health-bar {
   width: 100%;
   height: 10px;
@@ -96,6 +103,12 @@ button {
   z-index: 1;
 }
 
+#pikachu img.pikachu_1{
+  width: 95%;
+  position: relative;
+  z-index: 1;
+}
+
 #player-health-bar {
   width: 100%;
   height: 10px;
@@ -113,7 +126,7 @@ button {
 
 #text {
   text-align: center;
-  font-size: 30px;
+  font-size: 25px;
   margin: 0;
 }
 
@@ -124,7 +137,7 @@ div .para {
 
 #pharse {
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   display: none;
   background-color: bisque;
 
@@ -132,7 +145,7 @@ div .para {
 
 #options {
   background-color: var(--orange);
-  margin: 16px 0;
+  margin: 10px 0;
   padding: 16px 25px;
 }
 

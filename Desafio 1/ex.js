@@ -1,32 +1,8 @@
-class Player {
-  constructor(name, type, pharse, hp) {
-    this.playerTotalHp = hp;
-    this.playerHp = hp;
-    this.block = 0;
-    this.name = name;
-    this.type = type;
-    this.pharse = pharse;
-  }
-}
 
-const player = new Player('Pikachu', 'eletric', 'I ll shock your system!', 274);
-const playerHpElement = document.getElementById('player-health');
-
-const opponent = new Player('Squirtle', 'water', 'I ll wash you, watch out!', 300);
-const opponentHpElement = document.getElementById('opponent-health');
-const opponentTotalHp = 292;
-let opponentHp = 292;
-
-
-const turnText = document.getElementById('text');
-let isTurnHappening = false;
-
-const pharse = document.getElementById('pharse');
-
-const playerAttacks = {
+const _playerAttacks = {
   thunderShock: {
     power: 40,
-    accuracy: 100,
+    accuracy: 40,
     name: 'Thunder Shock',
     type: 'electric',
   },
@@ -38,7 +14,7 @@ const playerAttacks = {
   },
   thunder: {
     power: 110,
-    accuracy: 70,
+    accuracy: 50,
     name: 'Thunder',
     type: 'electric',
   },
@@ -49,14 +25,14 @@ const playerAttacks = {
     type: 'fighting',
   },
   giveup: {
-    power: 292,
+    power: 8001,
     accuracy: 100,
     name: 'Run For Live!',
     type: 'Only For Braves',
   },
 }
 
-const opponentAttacks = {
+const _opponentAttacks = {
   tackle: {
     power: 40,
     accuracy: 100,
@@ -83,11 +59,137 @@ const opponentAttacks = {
   }
 }
 
+class Player {
+  constructor(name, type, pharse, hp, playerAttacks, playerHpElement) {
+    this.totalHp = hp;
+    this.playerHp = hp;
+    this.block = 0;
+    this.name = name;
+    this.type = type;
+    this.pharse = pharse;
+    this.playerAttacks = playerAttacks;
+    this.playerHpElement = document.getElementById(playerHpElement);
+    this.exp = 0;
+    this.lvl = 0;
+  }
+
+  // Check if attacks misses
+  // 0 : miss
+  // 1 : hit
+  willAttackMiss (accuracy) {
+    return Math.floor(Math.random() * 100) > accuracy;
+  }
+
+  // Return value random damage
+  damageAtack() {
+    return Math.floor(Math.random() * 100);
+  }
+
+  // Check if attacks blokc opponent
+  // 0 : no block
+  // 2 : block opponent
+  willAttackBlock(power, accuracy) {
+    switch (power) {
+      case 'Thunder Shock':
+        return this.block = (Math.floor(Math.random() * 100) > accuracy)? 0 : 1;
+      default: return 0;
+    }
+  }
+
+  // 0 : no HP
+  // 1 : update with sucess
+  updatePlayerHp(newHP) {
+    // Prevents the HP to go lower than 0
+    this.playerHp = Math.max(newHP, 0);
+  
+    // If player health is equal 0 opponent wins
+    if (this.playerHp === 0) {
+      return 0;
+    }
+  
+    // Update the player hp bar
+    const barWidth = (this.playerHp / this.totalHp) * 100;
+    this.playerHpElement.style.width = barWidth + '%';
+
+    return 1;
+  }
+
+  // Check if is Block 
+  // 0 : no blocked
+  // 1 : blocked, and phases blocked decrease
+  isBlocked() {
+    if(this.block > 0) {
+      this.block--;
+      return 1;
+    }
+    else return 0;
+  }
+
+  evolution() {
+    this.exp += 1;
+    if(this.exp > 3 && this.lvl < 1) {
+      let src = '#' + `${(this.name).toLowerCase()}` + ' img';
+      let img = document.querySelector(src);
+      src =  'assets/' + `${(this.name).toLowerCase()}` +  '_1.gif';
+      img.src = src;
+      setTimeout(() => {
+        img.className = `${(this.name).toLowerCase()}` + '_1';
+      }, 800);
+
+      if(this.name == 'Picachu') {
+        _playerAttacks.thunder += 20;
+        _playerAttacks.quickAttack += 20;
+      } else {
+        _opponentAttacks.tackle += 20;
+        _opponentAttacks.quickAttack += 60;
+      }
+
+      //TODO: new atack
+    }
+  }
+
+
+  // *************************************************************************************
+  // player attack function that receives the used attack
+  // return false if attack misses
+  // otherwise update opponents health and return true
+  // *************************************************************************************
+  playerAttack(attack, opponent) {
+    // 0: return false if attack misses
+    // 1: otherwise update opponents health and return true
+    let accuracy = 10;
+    
+    if(attack.type == 'electric' && opponent.type == 'water') {
+        attack.power += this.damageAtack();
+    }
+
+    if((this.willAttackMiss(100 - attack.accuracy))) {
+      this.evolution();
+      let newHP = opponent.playerHp - attack.power;
+      opponent.updatePlayerHp(newHP)
+      return 1;
+    }
+    return 0;
+  }
+}
+
+const _player = new Player('Pikachu', 'eletric', 'I ll shock your system!', 274, _playerAttacks, 'player-health');
+const _opponent = new Player('Squirtle', 'water', 'I ll wash you, watch out!', 300, _opponentAttacks, 'opponent-health');
+
+
+const _turnText = document.getElementById('text');
+let _isTurnHappening = false;
+
+const _innerPharse = document.getElementById('pharse');
+
+/*
+Game Class
+*/
 function gameOver (winner) {
   // Wait 1000 (Health loss animation)
   setTimeout(() => {
     // Update HTML text with the winner
-    turnText.innerText = winner + ' is the winner!';
+    _turnText.innerText = winner + ' is the winner!';
     // Open alert with the winner
     alert(winner + ' is the winner! Close this alert to play again');
     // Reload the game
@@ -97,114 +199,18 @@ function gameOver (winner) {
 
 // display text
 function displayTalk(text) {
-  pharse.style.display = 'inline-block';
-  pharse.innerText = text
+  _innerPharse.style.display = 'inline-block';
+  _innerPharse.innerText = text
 }
 
 function cleanDisplay() {
-  pharse.innerText = ''
-  pharse.style.display = null;
-}
-
-// Check if attacks misses
-function willAttackMiss (accuracy) {
-  return Math.floor(Math.random() * 100) > accuracy;
-}
-
-// Return random damage
-function damageAtack() {
-  return Math.floor(Math.random() * 100);
-}
-
-// Check if attacks misses
-function willAttackBlock2Turns(power, accuracy) {
-  // 0 : no block
-  // 1 : block opponent
-  switch (power) {
-    case 'Thunder Shock':
-      return Math.floor(Math.random() * 100) > accuracy;
-    break;
-    default: break;
-  }
-  
-  return 0;
-}
-
-function updatePlayerHp(newHP) {
-  // Prevents the HP to go lower than 0
-  player.playerHp = Math.max(newHP, 0);
-
-  // If player health is equal 0 opponent wins
-  if (playerHp === 0) {
-    gameOver('Opponent');
-  }
-
-  // Update the player hp bar
-  const barWidth = (player.playerHp / player.playerTotalHp) * 100;
-  playerHpElement.style.width = barWidth + '%';
-}
-
-function updateOpponentHp(newHP) {
-  // Prevents the HP to go lower than 0
-  opponent.playerHp = Math.max(newHP, 0);
-
-  // If oppont health is equal 0 player wins
-  if (opponentHp === 0) {
-    gameOver('Player');
-  }
-
-  // Update the opponents hp bar
-  const barWidth = (opponent.playerHp / opponent.playerTotalHp) * 100;
-  opponentHpElement.style.width = barWidth + '%';
-}
-
-// *************************************************************************************
-// Here you need to implement the player attack function that receives the used attack
-// return false if attack misses
-// otherwise update opponents health and return true
-// *************************************************************************************
-
-function playerAttack(attack) {
-  // 0: return false if attack misses
-  // 1: otherwise update opponents health and return true
-  let accuracy = 10;
-  
-  if(attack.type == 'electric' && opponent.type == 'water') {
-      attack.power += damageAtack();
-      console.log(player.pharse);
-  }
-
-  if((willAttackMiss(accuracy))) {
-    let newHP = opponentHp - attack.power;
-    updateOpponentHp(newHP)
-    return 1;
-  }
-  return 0;
-}
-
-// *************************************************************************************
-// Here you need to implement the opponent attack function that receives the used attack
-// return false if attack misses
-// otherwise update player health and return true
-// *************************************************************************************
-
-// opponent attack function that receives the used attack
-function opponentAttack(attack) {
-  // 0: return false if attack misses
-  // 1: otherwise update player health and return true
-  let accuracy = 10;
-
-  if((willAttackMiss(accuracy))) {
-    let newHP = playerHp - attack.power;
-    updatePlayerHp(newHP)
-    return 1;
-  }
-  return 0;
+  _innerPharse.innerText = ''
+  _innerPharse.style.display = null;
 }
 
 function chooseOpponentAttack () {
   // Put all opponents attacks in a array
-  const possibleAttacks = Object.values(opponentAttacks);
+  const possibleAttacks = Object.values(_opponentAttacks);
 
   // Randomly chooses one attack from the array
   return possibleAttacks[Math.floor(Math.random() * possibleAttacks.length)];
@@ -212,37 +218,43 @@ function chooseOpponentAttack () {
 
 function turn(playerChosenAttack) {
   // Don't start another turn till the current one is not finished
-  if (isTurnHappening) {
+  if (_isTurnHappening) {
     return;
   }
-  isTurnHappening = true;
+  _isTurnHappening = true;
 
-  displayTalk(player.name + ': ' + player.pharse);
+  displayTalk(_player.name + ': ' + _player.pharse + '\n' + playerChosenAttack.name);
   
-  const didPlayerHit = playerAttack(playerChosenAttack);
-  opponent.block = (didPlayerHit && willAttackBlock2Turns(playerChosenAttack.name, 90)? 2 : opponent.block );
+  const didPlayerHit = _player.playerAttack(playerChosenAttack, _opponent);
   
+  // If player health is equal 0 opponent wins
+  if (_opponent.playerHp === 0) {
+    gameOver(_player.name);
+  }
+
   // Update HTML text with the used attack
-  turnText.innerText = 'Player used ' + playerChosenAttack.name;
+  _turnText.innerText = 'Player used ' + playerChosenAttack.name;
   
   // Update HTML text in case the attack misses
   if (!didPlayerHit) {
-    turnText.innerText += ', but missed!';
-  } else if(opponent.block) {
-    turnText.innerText += ' : ' + player.pharse;
+    _turnText.innerText += ', but missed!';
+    displayTalk(_player.name + ' ' + playerChosenAttack.name + ' ' + ' missed');
+  } else if(_opponent.block) {
+    _turnText.innerText += ' : ' + _player.pharse;
+    _opponent.willAttackBlock(playerChosenAttack.name, 50);
   }
     
   // Wait 2000ms to execute opponent attack (Player attack animation time)
-  if(opponent.block) {
-    opponent.block -= 1;
+  if(_opponent.isBlocked()) {
     setTimeout(() => {
-      turnText.innerText = opponent.name + ': Blocked!';
+      displayTalk('Opponent is slow, attack!')
+      _turnText.innerText = _opponent.name + ': Blocked!';
       // Wait 2000ms to end the turn (Opponent attack animation time)
       setTimeout(() => {
         // Update HTML text for the next turn
-        turnText.innerText = 'Please choose one attack';
-        isTurnHappening = false;
-        displayTalk(player.name + ': ' + 'You in shock');
+        _turnText.innerText = 'Please choose one attack';
+        _isTurnHappening = false;
+        displayTalk(_player.name + ': ' + 'You in shock');
       }, 2000);
     }, 2000);
   } else {
@@ -250,39 +262,47 @@ function turn(playerChosenAttack) {
       // Randomly chooses opponents attack
       const opponentChosenAttack = chooseOpponentAttack();
       
-      const didOpponentHit = opponentAttack(opponentChosenAttack);
+      const didOpponentHit = _opponent.playerAttack(opponentChosenAttack, _player);
      
-      displayTalk(opponent.name + ' : ' + opponent.pharse);
+      // If player health is equal 0 opponent wins
+      if (_player.playerHp === 0) {
+        gameOver(_opponent.name);
+      }
+
+      _player.willAttackBlock(opponentChosenAttack.name, 50);
+
+      displayTalk(_opponent.name + ' : ' + _opponent.pharse + '\n' + opponentChosenAttack.name);
+      
       // Update HTML text with the used attack
-      turnText.innerText = 'Opponent used ' + opponentChosenAttack.name;
+      _turnText.innerText = 'Opponent used ' + opponentChosenAttack.name;
       
       // Update HTML text in case the attack misses
       if (!didOpponentHit) {
-        turnText.innerText += ', but missed!';
+        _turnText.innerText += ', but missed!';
       }
       // Wait 2000ms to end the turn (Opponent attack animation time)
       setTimeout(() => {
         // Update HTML text for the next turn
-        turnText.innerText = 'Please choose one attack';
-        isTurnHappening = false;
+        _turnText.innerText = 'Please choose one attack';
+        cleanDisplay();
+        _isTurnHappening = false;
       }, 2000);
     }, 2000);
   }
 }
 
-// Set buttons click interaction
 document.getElementById('thunder-shock-button').addEventListener('click', function() {
-  turn(playerAttacks.thunderShock);
+  turn(_playerAttacks.thunderShock);
 });
 document.getElementById('quick-attack-button').addEventListener('click', function() {
-  turn(playerAttacks.quickAttack);
+  turn(_playerAttacks.quickAttack);
 });
 document.getElementById('thunder-button').addEventListener('click', function() {
-  turn(playerAttacks.thunder);
+  turn(_playerAttacks.thunder);
 });
 document.getElementById('submission-button').addEventListener('click', function() {
-  turn(playerAttacks.submission);
+  turn(_playerAttacks.submission);
 });
 document.getElementById('giveup-button').addEventListener('click', function() {
-  turn(playerAttacks.giveup);
+  turn(_playerAttacks.giveup);
 });
