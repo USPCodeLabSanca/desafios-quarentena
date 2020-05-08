@@ -223,6 +223,9 @@ function getParameterByName() {
 // config map
 let x, y, b;
 [x, y, b] = getParameterByName()
-
+console.log(x)
+if(x == undefined || isNaN(x) || x == '' || y == undefined || b == undefined) {
+	x = 30; y = 28; b = 30;
+}
 // Instantiate a Map object
 new Map(document.getElementById('root'), x, y, b);
