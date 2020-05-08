@@ -55,8 +55,20 @@ class Cell {
   // (This function is called inside cellRightClick function that are in the Map class,
   // you dont need to worry with that)
   // *************************************************************************************
+  // Desafio 1
+  toggleFlag() {
+	if(this.isFlagged === false) {
+		this.element.classList.add('flag'); 
+		this.isFlagged = true;
+	}
+  }
 }
 
+// params : 
+// 			nodo where map will show
+//			x is width
+//          y is heigyh
+// return : map x * y
 class Map {
 	constructor (root, width, height, numberOfBombs) {
 		this.cells = [];
@@ -66,6 +78,8 @@ class Map {
 		this.hasMapBeenClickedYet = false;
 		this.isGameOver = false;
 		this.visibleCells = 0;
+		this.lifes = 3;
+		this.elementHearts = document.getElementsByTagName('img');
 
 		for (let row = 0; row < height; row ++) {
 			this.cells.push([]);
@@ -75,6 +89,12 @@ class Map {
 		}
 
 		root.style.gridTemplateColumns = `repeat(${width}, max-content)`;
+	}
+
+	// Used to check life and decrease it
+	hasLife() {
+		this.lifes -= 1;
+		return this.lifes;
 	}
 
 	// Used to verify if the given position is outside the map bounds
@@ -144,7 +164,12 @@ class Map {
 		}
 		if (clickedCell.isBomb) {
 			clickedCell.element.style.backgroundColor = 'red';
-			this.gameOver();
+			if(!this.hasLife()) {
+				this.elementHearts[this.lifes].style.display = 'none';
+				this.gameOver();
+			}
+			else 
+				this.elementHearts[this.lifes].style.display = 'none';
 			return;
 		}
 		clickedCell.reveal();
@@ -181,4 +206,4 @@ class Map {
 }
 
 // Instantiate a Map object
-new Map(document.getElementById('root'), 50, 30, 300);
+new Map(document.getElementById('root'), 50, 30, 1000);
