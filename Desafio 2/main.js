@@ -199,11 +199,25 @@ class Map {
 			for (let column = 0; column < this.width; column ++) {
 				const cell = this.cells[row][column];
 				if (cell.isBomb && !cell.isFlagged) cell.reveal();
+				if (cell.isBomb && cell.isFlagged) cell.element.style.backgroundColor = 'red';;
 			}
 		}
 		this.isGameOver = true;
 	}
 }
 
+// get params from url, must pass with format x="000"&y="000"&b="000"
+function getParameterByName() {
+	url = window.location.href;
+	let x = url.search("x=")
+	let y = url.search("y=")
+	let b = url.search("b=")
+
+	return [parseInt(url[x+2]+url[x+3]), parseInt(url[y+2]+url[y+3]), parseInt(url[b+2]+url[b+3]+url[b+4])]
+}
+
+let x, y, b;
+[x, y, b] = getParameterByName()
+console.log(x)
 // Instantiate a Map object
-new Map(document.getElementById('root'), 50, 30, 1000);
+new Map(document.getElementById('root'), x, y, b);

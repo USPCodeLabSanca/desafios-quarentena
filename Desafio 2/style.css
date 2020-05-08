@@ -57,3 +57,31 @@ div#lifes img {
 	padding: 0;
 	width: 4%;
 }
+
+.opitions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-size: cover;
+	text-align: center;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-size: cover;
+	text-align: center;
+	padding: 20px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.opitions a {
+	margin: 1vh 3vw;
+	padding: 70px;
+	background-color: rgb(38, 26, 207);
+	color: rgb(255, 255, 255);
+	font-size: 30px;
+	font-weight: bolder;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	text-decoration: none;
+}
