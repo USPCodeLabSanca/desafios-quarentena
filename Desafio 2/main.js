@@ -57,11 +57,14 @@ class Cell {
   // *************************************************************************************
   // Desafio 1
   toggleFlag() {
-	this.isFlagged != this.isFlagged
-	if(this.isFlagged)
+	if(!this.isFlagged) {
 		this.element.classList.add('flag'); 
-	else
+		this.isFlagged = true;
+	}
+	else {
 		this.element.classList.remove('flag');
+		this.isFlagged = false;
+	}
   }
 }
 
