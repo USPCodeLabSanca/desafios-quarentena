@@ -57,10 +57,11 @@ class Cell {
   // *************************************************************************************
   // Desafio 1
   toggleFlag() {
-	if(this.isFlagged === false) {
+	this.isFlagged != this.isFlagged
+	if(this.isFlagged)
 		this.element.classList.add('flag'); 
-		this.isFlagged = true;
-	}
+	else
+		this.element.classList.remove('flag');
   }
 }
 
@@ -216,8 +217,9 @@ function getParameterByName() {
 	return [parseInt(url[x+2]+url[x+3]), parseInt(url[y+2]+url[y+3]), parseInt(url[b+2]+url[b+3]+url[b+4])]
 }
 
+// config map
 let x, y, b;
 [x, y, b] = getParameterByName()
-console.log(x)
+
 // Instantiate a Map object
 new Map(document.getElementById('root'), x, y, b);
