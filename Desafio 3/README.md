@@ -1,6 +1,6 @@
 # Desafio #3 - Asteroids
 
-<img href="assets/demo.png">
+<img src="assets/demo.png">
 
 ## Contexto
 
