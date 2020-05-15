@@ -2,7 +2,7 @@ const BONUS_SIZE = 25;
 
 /**
 * This is a class declaration
-* This class is responsible for defining the Asteroids's behavior.
+* This class is responsible for defining th bonuss's behavior.
 * this class extends the MovableEntity class, which is responsible for defining physics behavior
 * If you'd like to know more about class inheritance in javascript, see this link
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
@@ -13,7 +13,6 @@ class Bonus extends MovableEntity {
 		mapInstance,
 		initialPosition
 	) {
-
 		const direction = Bonus.getRandomDirection();
 
 		// The `super` function will call the constructor of the parent class.
@@ -28,7 +27,7 @@ class Bonus extends MovableEntity {
 		// in the `map.js` file
 		mapInstance.addEntity(this);
 
-		// Finds a random image to assign to the asteroid's element
+		// Finds a random image to assign to the bonus's element
 		this.rootElement.style.backgroundImage = `url('assets/bonus_1.png')`;
 		this.rootElement.style.backgroundSize = BONUS_SIZE + 'px';
 		this.rootElement.style.zIndex = 1;
@@ -37,7 +36,7 @@ class Bonus extends MovableEntity {
 	
 
 	/**
-	* Creates a random direction for an asteroid
+	* Creates a random direction for a bonus
 	* @returns { Vector }
 	*/
 	static getRandomDirection () {
@@ -53,8 +52,7 @@ class Bonus extends MovableEntity {
 	}	
 	
 	/**
-	 * Uppon collision with a bullet, reduces the asteroid's life. If the asteroid
-	 * has zero life, destroy it.
+	 * Uppon collision with a bullet, apply bonus to player. Then destroy it.
 	 * @argument { MovableObject } object
 	 */
 	collided (object) {
@@ -65,18 +63,16 @@ class Bonus extends MovableEntity {
 			Bullet.applyBonus(this.getRandomBonus());
 			this.mapInstance.removeEntity(this);
 			this.delete();
-		}
-		
+		}	
 	}
 
 	/*
 	* This function should be called every game frame. It will not only update the
-	* asteroid's physics, but also rotate it based on it's rotation speed.
+	 bonus's physics, but also rotate it based on it's rotation speed.
 	*/
 	frame () {
-		// If the asteroids is without life, dn't move it.
+		// If th bonuss is without life, dn't move it.
 		super.frame();
 		this.setDirection(this.direction.rotate(this.rotationSpeed))
-
 	}
 }

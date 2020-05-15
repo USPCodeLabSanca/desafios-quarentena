@@ -112,7 +112,7 @@ class Map {
 	shouldAsteroidSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.005 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = 0.006 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -124,7 +124,7 @@ class Map {
 	shouldBonusSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.001 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = 0.0009 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
 		return Math.random() < asteroidSpawnChance;
 	}

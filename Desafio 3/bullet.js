@@ -59,6 +59,7 @@ class Bullet extends MovableEntity {
 		BULLET_SIZE = 10;
 	}
 
+	// Apply an config of ball by 5 seconds
 	static applyBonus(bonus) {
 		switch(bonus) {
 			case 1:
@@ -87,13 +88,8 @@ class Bullet extends MovableEntity {
 
 	// If the bullet collides with an asteroid, delete the bullet.
 	collided (object) {
-		// if (object instanceof Asteroid && REFLECT) {	
-		// 	this.setVelocity(new Vector(-this.velocity.x, -this.velocity.y));
-		// 	this.setDirection(this.direction.rotate(180));
-		// } else {
-			this.mapInstance.removeEntity(this);
-			this.delete();
-		//}
+		this.mapInstance.removeEntity(this);
+		this.delete();
 	}
 	
 }
