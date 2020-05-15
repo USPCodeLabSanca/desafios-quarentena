@@ -34,6 +34,7 @@ class Vector {
 	/**
 	* Returns the magnitude of the vector.
 	* The magnitude of a vector is the vector's intensity (how big/strong the vector is).
+	* Know as module value
 	* @returns { number }
 	*/
 	magnitude () {
@@ -44,6 +45,7 @@ class Vector {
 	* Returns a normalized version of this vector.
 	* A normalized vector is a vector with a magnitude value of 1, but with the same
 	* direction of the original vector. If you'd like to know more about vector normalization,
+	* return ( u / || u || )
 	* see the link: https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-vectors/a/vector-magnitude-normalization
 	* @returns { Vector }
 	*/

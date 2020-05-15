@@ -11,6 +11,20 @@ class Map {
 	* @argument { HTMLDivElement } containerElement
 	*/
 	constructor (containerElement) {
+
+		// This count how many asteroids was broken
+		this.score = 0;
+		this.gameinfoElement = document.getElementById("game-info");
+		
+		this.scoreElement = document.createElement('div');
+		this.scoreElement.innerHTML = '<h1>Score: 0</h1>';
+		
+		this.timerElement = document.createElement('div');
+		this.timerElement.innerHTML = '<h1>Timer: 0</h1>';
+
+		this.gameinfoElement.appendChild(this.scoreElement);
+		this.gameinfoElement.appendChild(this.timerElement);
+
 		// This array will contain all of the game's movableEntities.
 		// All movableEntities will have it's physics updated in the `frame` function,
 		// and will also be checked for possible collisions every frame.
@@ -20,6 +34,19 @@ class Map {
 
 		// This is to allow for the map to set it's difficulty based on the game's time length
 		this.gameStartTimestamp = Date.now();
+	}
+
+	/**
+	 * 	This update score and your view
+	 */
+	updateScore() {
+		this.score += 1;
+		this.gameinfoElement.childNodes[0].innerHTML =  "<h1>Score: " + this.score + "</h1>";
+	}
+
+	updateTimer() {
+		let timer = parseInt((Date.now() - this.gameStartTimestamp)/1000);
+		this.gameinfoElement.childNodes[1].innerHTML =  "<h1>Time: " + timer + " s</h1>";
 	}
 
 	/**
@@ -46,6 +73,11 @@ class Map {
 		// If you dont't know how the findIndex method works, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
 		this.movableEntities.splice(this.movableEntities.findIndex(a => a === entity), 1);
+		
+		// Increase score of Player if an Asteroid was broken.
+		if (entity instanceof Asteroid) {
+			this.updateScore();
+		}
 	}
 
 	/**
@@ -86,6 +118,9 @@ class Map {
 	* handle any collision that happened.
 	*/
 	frame () {
+		// Update time of running game
+		this.updateTimer();
+
 		// Call the frame function on all movableEntities
 		this.movableEntities.forEach(entity => entity.frame());
 
