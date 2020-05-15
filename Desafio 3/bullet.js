@@ -1,6 +1,6 @@
-const BULLET_SIZE = 10;
-const BULLET_SPEED = 4;
-
+let BULLET_SIZE = 10;
+let BULLET_SPEED = 4;
+let REFLECT = true;
 /**
 * This is a class declaration
 * This class is responsible for defining the bullets behavior.
@@ -13,17 +13,20 @@ class Bullet extends MovableEntity {
 	/**
 	* @argument { HTMLDivElement } containerElement The DOM element that will contain the bullet
 	* @argument { Map } mapInstance The map in which the bullet will spawn
+	* @argument { Vector } initialPosition Where the bullet is spawn in map
 	* @argument { Vector } direction The bullet's direction
 	*/
 	constructor (
 		containerElement,
 		mapInstance,
+		initialPosition,
 		direction
 	) {
+		//direction = new Vector(-0.1, -0.1);
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
-		super(containerElement, BULLET_SIZE, undefined, direction.normalize().scale(BULLET_SPEED), direction);
+		super(containerElement, BULLET_SIZE, initialPosition, direction.normalize().scale(BULLET_SPEED), direction);
 
 		this.mapInstance = mapInstance;
 
@@ -36,11 +39,61 @@ class Bullet extends MovableEntity {
 		this.rootElement.style.backgroundSize = this.size + 'px';
 	}
 
+	// Custom shoots
+	static bonusLazyBall() {
+		BULLET_SPEED = 0.01;
+		BULLET_SIZE = 10;
+	}
+
+	static bonusFastBall() {
+		BULLET_SPEED = 9;
+		BULLET_SIZE = 20;
+	}
+
+	static bonusBigBall() {
+		BULLET_SIZE = 40;
+	}
+
+	static defaultBall() {
+		BULLET_SPEED = 4;
+		BULLET_SIZE = 10;
+	}
+
+	static applyBonus(bonus) {
+		switch(bonus) {
+			case 1:
+				Bullet.bonusBigBall();
+				REFLECT = true;
+				break;
+			case 2:
+				Bullet.bonusFastBall();
+				REFLECT = true;
+			break;
+			case 3:
+				Bullet.bonusLazyBall();
+				REFLECT = false;
+			break;
+			default:
+				Bullet.defaultBall();
+				REFLECT = false;
+			break;
+		}
+
+		setTimeout(() => {
+			Bullet.defaultBall();
+			REFLECT = false;
+		}, 5000);
+	}
+
 	// If the bullet collides with an asteroid, delete the bullet.
 	collided (object) {
-		if (object instanceof Asteroid) {
+		// if (object instanceof Asteroid && REFLECT) {	
+		// 	this.setVelocity(new Vector(-this.velocity.x, -this.velocity.y));
+		// 	this.setDirection(this.direction.rotate(180));
+		// } else {
 			this.mapInstance.removeEntity(this);
 			this.delete();
-		}
+		//}
 	}
+	
 }

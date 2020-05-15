@@ -19,8 +19,8 @@ function frame () {
 	map.frame();
 
 	// if the player is pressing one of the keys, call the turn function
-	if (pressedKeys['a'] || pressedKeys['ArrowLeft']) player.turn(-1);
-	if (pressedKeys['d'] || pressedKeys['ArrowRight']) player.turn(1);
+	if (pressedKeys['a'] || pressedKeys['ArrowLeft']) player.turn(-2);
+	if (pressedKeys['d'] || pressedKeys['ArrowRight']) player.turn(2);
 }
 
 // This is a dictionary that will hold the keys that are being held down at the time.

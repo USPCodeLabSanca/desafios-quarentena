@@ -42,6 +42,7 @@ class Player extends MovableEntity {
 
 		// Assigns the player's image to it's element
 		this.rootElement.style.backgroundImage = "url('assets/player_invert.svg')";
+		this.rootElement.style.zIndex = 1;
 		this.rootElement.style.backgroundSize = this.size + 'px';
 	}
 
@@ -51,20 +52,24 @@ class Player extends MovableEntity {
 	*/
 	turn (degrees) {
 		this.setDirection(this.direction.rotate(degrees));
+		let newPostion = new Vector(this.direction.x, this.direction.y);
+		this.setVelocity(newPostion.scale(0.6));
 	}
 
 	/**
 	* Instantiates a bullet in front of the player.
 	*/
 	shoot () {
-		new Bullet (this.containerElement, this.mapInstance, this.direction);
+		new Bullet (this.containerElement, this.mapInstance, this.position, this.direction);
 	}
 
 	/**
 	* This is only called if the player collides with an asteroid. Therefore,
 	* the game should end.
 	*/
-	collided () {
+	collided (object) {
+		if(object instanceof Bonus)
+			return;
 		this.gameOverFunction();
 	}
 }

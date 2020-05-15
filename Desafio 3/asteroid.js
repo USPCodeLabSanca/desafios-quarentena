@@ -4,7 +4,7 @@ const MAX_ASTEROID_SIZE = 80;
 const MIN_ASTEROID_LIFE = 1;
 const MAX_ASTEROID_LIFE = 3;
 
-const MAX_ASTEROID_ROTATION_SPEED = 1;
+const MAX_ASTEROID_ROTATION_SPEED = 2;
 
 /**
 * This is a class declaration
@@ -23,7 +23,7 @@ class Asteroid extends MovableEntity {
 		const direction = Asteroid.getRandomDirection();
 		const velocity = (-1.2/(size*size));
 
-		const colors = ['yellow', 'red', 'blue', 'blue'];
+		const colors = ['yellow', 'red', 'blue', 'red',  'blue'];
 
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
@@ -41,11 +41,10 @@ class Asteroid extends MovableEntity {
 		this.life = this.calculateMaxLife();
 
 		// Finds a random image to assign to the asteroid's element
-		const asteroidImageIndex = Math.floor(Math.random() * 4) + 1;
+		const asteroidImageIndex = Math.floor(Math.random() * 5) + 1;
 		this.rootElement.style.backgroundImage = `url('assets/asteroid-${asteroidImageIndex}_invert.svg')`;
 		this.rootElement.style.backgroundSize = size + 'px';
 		this.rootElement.classList.add(colors[asteroidImageIndex-1]);
-		
 	}
 
 	/**
@@ -122,15 +121,16 @@ class Asteroid extends MovableEntity {
 		// If objcted collided with bullet, show gif explosion
 		if (this.life <= 0) {
 			this.setElement(`url('assets/explosion.gif')`, this.size * 4, '');
+			this.size = 0;
 			setTimeout(() => {
-
 				// If was a big asteroid, then release anothe one with half of max size and one life.
+				// spawn asteroid
 				if(this.size > MAX_ASTEROID_SIZE / 2) {
 					this.life = 1;
 					this.size = MAX_ASTEROID_SIZE / 3;
 					this.setElement(`url('assets/asteroid-4_invert.svg')`, this.size, 'red');
 				} else {
-					this.mapInstance.removeEntity(this);
+			 		this.mapInstance.removeEntity(this);
 					this.delete();
 				}
 
@@ -143,6 +143,7 @@ class Asteroid extends MovableEntity {
 	* asteroid's physics, but also rotate it based on it's rotation speed.
 	*/
 	frame () {
+		// If the asteroids is without life, dn't move it.
 		if (this.life > 0) {
 			super.frame();
 			this.setDirection(this.direction.rotate(this.rotationSpeed))

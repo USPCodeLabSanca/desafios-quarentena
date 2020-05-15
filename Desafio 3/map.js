@@ -112,7 +112,19 @@ class Map {
 	shouldAsteroidSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.003 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = 0.005 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+
+		return Math.random() < asteroidSpawnChance;
+	}
+
+	/**
+	* This function will check if an bonus should spawn at the current game frame.
+	* @returns { boolean }
+	*/
+	shouldBonusSpawn () {
+		// Note that the formula considers how long the gave have been going.
+		// the longed the game, the higher the chance to spawn more asteroids.
+		const asteroidSpawnChance = 0.001 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -137,8 +149,23 @@ class Map {
 				this.verifyForCollision(entity1, entity2);
 			}
 
+			let dist = entity1.distanceFromCenter();
+
+			if(entity1 instanceof Player) {
+				if(dist < 300 && dist > 201)  
+					document.getElementById('arena-line').style.border = ' 5px solid rgb(200, 30, 30)';
+				else if(dist > 300) {
+					entity1.gameOverFunction();
+				}
+				else {
+					document.getElementById('arena-line').style.border = ' 1px solid rgb(255, 255, 255)';
+				}
+			}	
+
 			// if the entity is too far from the center, delete it to conserve processing power.
-			if (entity1.distanceFromCenter() > 300) entity1.delete();
+			if (entity1.distanceFromCenter() > 300) {
+				entity1.delete();		
+			}
 		}
 
 		// Once the physics has been calculated, and collisions have been checked,
@@ -149,6 +176,14 @@ class Map {
 
 			// create the asteroid
 			new Asteroid(this.containerElement, this, position);
+		}
+
+		if (this.shouldBonusSpawn()) {
+			// pick a random position for the asteroid
+			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
+
+			// create the bonus
+			new Bonus(this.containerElement, this, position);
 		}
 	}
 }
