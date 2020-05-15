@@ -12,6 +12,7 @@ class Map {
 	*/
 	constructor (containerElement) {
 
+		// Display info game
 		// This count how many asteroids was broken
 		this.score = 0;
 		this.gameinfoElement = document.getElementById("game-info");
@@ -38,12 +39,16 @@ class Map {
 
 	/**
 	 * 	This update score and your view
+	 *  Call this always a Asteroid is  remove from map
 	 */
 	updateScore() {
 		this.score += 1;
 		this.gameinfoElement.childNodes[0].innerHTML =  "<h1>Score: " + this.score + "</h1>";
 	}
 
+	/**
+	 * This function gives the time since the game started in seconds. 
+	 */
 	updateTimer() {
 		let timer = parseInt((Date.now() - this.gameStartTimestamp)/1000);
 		this.gameinfoElement.childNodes[1].innerHTML =  "<h1>Time: " + timer + " s</h1>";

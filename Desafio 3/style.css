@@ -13,9 +13,11 @@ body, html {
 	margin: auto;
 	justify-content: space-around;
 	padding: 3vh 20vw 0;
+	/* color: white; */
 }
 
 #game-info div p {
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: 200;
 }
 
@@ -25,6 +27,9 @@ body, html {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	/* background-repeat: repe; */
+	background-color: #000000;
+	background-image: url('assets/asteroid-4_invert.svg');
 }
 
 #arena-line {
@@ -33,10 +38,11 @@ body, html {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid black;
+	border: 1px solid rgb(195, 195, 195);
 	border-radius: 100%;
 	overflow: hidden;
 	margin: 0;
+	background-color: black;
 }
 
 #movable-entity-container {
@@ -46,4 +52,23 @@ body, html {
 
 .movable-entity {
 	position: absolute;
+}
+
+.yellow {
+	filter: contrast(0) sepia(100%) hue-rotate(16deg) brightness(1.4) saturate(4.28);
+}
+
+.blue {
+	filter: contrast(0) sepia(100%) hue-rotate(096deg) brightness(1.4) saturate(4.28);
+}
+
+.red {
+	filter: contrast(0) sepia(60%) hue-rotate(2deg) brightness(1.4) saturate(200);
+}
+
+.alert {
+	padding: 20px;
+	background-color: #f44336; /* Red */
+	color: white;
+	margin-bottom: 15px;
 }

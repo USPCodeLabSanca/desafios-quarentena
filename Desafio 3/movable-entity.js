@@ -30,6 +30,7 @@ class MovableEntity {
 		this.rootElement.style.height = size + 'px';
 		this.rootElement.style.left = this.position.x + 'px';
 		this.rootElement.style.top = this.position.y + 'px';
+		this.rootElement.style.fill = 'yellow';
 
 		this.setDirection(this.direction);
 
@@ -84,6 +85,10 @@ class MovableEntity {
 		// with the vector's representation. This is necessary because an element's top
 		// and left position mark's the element's top-left corner, and not it's center.
 		this.rootElement.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
+	}
+
+	setVelocity(velocity) {
+		this.velocity = velocity;
 	}
 
 	/**

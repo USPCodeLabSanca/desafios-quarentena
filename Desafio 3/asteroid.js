@@ -1,5 +1,5 @@
-const MIN_ASTEROID_SIZE = 20;
-const MAX_ASTEROID_SIZE = 50;
+const MIN_ASTEROID_SIZE = 18;
+const MAX_ASTEROID_SIZE = 80;
 
 const MIN_ASTEROID_LIFE = 1;
 const MAX_ASTEROID_LIFE = 3;
@@ -21,11 +21,14 @@ class Asteroid extends MovableEntity {
 	) {
 		const size = Asteroid.getRandomSize();
 		const direction = Asteroid.getRandomDirection();
+		const velocity = (-1.2/(size*size));
+
+		const colors = ['yellow', 'red', 'blue', 'blue'];
 
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
-		super(containerElement, size, initialPosition, initialPosition.scale(-0.001), direction);
+		super(containerElement, size, initialPosition, initialPosition.scale(velocity), direction);
 
 		this.mapInstance = mapInstance;
 		this.rotationSpeed = Asteroid.getRandomRotationSpeed();
@@ -38,9 +41,11 @@ class Asteroid extends MovableEntity {
 		this.life = this.calculateMaxLife();
 
 		// Finds a random image to assign to the asteroid's element
-		const asteroidImageIndex = Math.floor(Math.random() * 3) + 1;
-		this.rootElement.style.backgroundImage = `url('assets/asteroid-${asteroidImageIndex}.svg')`;
+		const asteroidImageIndex = Math.floor(Math.random() * 4) + 1;
+		this.rootElement.style.backgroundImage = `url('assets/asteroid-${asteroidImageIndex}_invert.svg')`;
 		this.rootElement.style.backgroundSize = size + 'px';
+		this.rootElement.classList.add(colors[asteroidImageIndex-1]);
+		
 	}
 
 	/**
@@ -82,6 +87,26 @@ class Asteroid extends MovableEntity {
 	}
 
 	/**
+	 * @param {string} image url of an immage 
+	 * @param {number} size size of render image in px 
+	 * @param {string} className the class the image will assume
+	 * 
+	 * Use this function to update rooElement in the game
+	 */
+	setElement(image, size, className) {
+		this.rootElement.style.backgroundImage = image;
+		this.rootElement.style.backgroundSize = size + 'px';
+		this.rootElement.style.width = size + 'px';
+		this.rootElement.style.heigth = size + 'px';
+
+		if(className === '') {
+			this.rootElement.classList.remove(...['yellow', 'blue', 'red']);
+		} else {
+			this.rootElement.classList.add(className);
+		}
+	}
+
+	/**
 	* Uppon collision with a bullet, reduces the asteroid's life. If the asteroid
 	* has zero life, destroy it.
 	* @argument { MovableObject } object
@@ -91,11 +116,25 @@ class Asteroid extends MovableEntity {
 		// If you'd like to know more about the instanceof operator, see this link:
 		// https://www.geeksforgeeks.org/instanceof-operator-in-javascript/
 		if (!(object instanceof Bullet)) return;
+		
+		this.life--;
+		
+		// If objcted collided with bullet, show gif explosion
+		if (this.life <= 0) {
+			this.setElement(`url('assets/explosion.gif')`, this.size * 4, '');
+			setTimeout(() => {
 
-		this.life --;
-		if (this.life === 0) {
-			this.mapInstance.removeEntity(this);
-			this.delete();
+				// If was a big asteroid, then release anothe one with half of max size and one life.
+				if(this.size > MAX_ASTEROID_SIZE / 2) {
+					this.life = 1;
+					this.size = MAX_ASTEROID_SIZE / 3;
+					this.setElement(`url('assets/asteroid-4_invert.svg')`, this.size, 'red');
+				} else {
+					this.mapInstance.removeEntity(this);
+					this.delete();
+				}
+
+			}, 100);
 		}
 	}
 
@@ -104,7 +143,9 @@ class Asteroid extends MovableEntity {
 	* asteroid's physics, but also rotate it based on it's rotation speed.
 	*/
 	frame () {
-		super.frame();
-		this.setDirection(this.direction.rotate(this.rotationSpeed));
+		if (this.life > 0) {
+			super.frame();
+			this.setDirection(this.direction.rotate(this.rotationSpeed))
+		}
 	}
 }

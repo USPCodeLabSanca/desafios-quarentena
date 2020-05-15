@@ -52,5 +52,5 @@ const intervalHandler = setInterval(frame);
 function gameOver () {
 	// This will unregister the frame function, so nothing else will be updated
 	clearInterval(intervalHandler);
-	alert('Você perdeu');
+	alert('Você perdeu, precione F5 para jogar novamente.');
 }
