@@ -38,6 +38,7 @@ class Map {
 	}
 
 	/**
+	 * 	Desafio 3 - Bonus 0
 	 * 	This update score and your view
 	 *  Call this always a Asteroid is  remove from map
 	 */
@@ -112,7 +113,7 @@ class Map {
 	shouldAsteroidSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.006 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = Math.min(0.009, 0.004 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000);
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -124,7 +125,7 @@ class Map {
 	shouldBonusSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.0009 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = 0.0005 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -135,25 +136,27 @@ class Map {
 	* handle any collision that happened.
 	*/
 	frame () {
+		
 		// Update time of running game
 		this.updateTimer();
-
-		// Call the frame function on all movableEntities
-		this.movableEntities.forEach(entity => entity.frame());
-
-		for (let i = 0; i < this.movableEntities.length; i ++) {
+		
+		//Call the frame function on all movableEntities
+		//this.movableEntities.forEach(entity => entity.frame());
+		
+		for (let i = 0; i < this.movableEntities.length; i++) {
 			const entity1 = this.movableEntities[i];
-			for (let j = i + 1; j < this.movableEntities.length; j ++) {
+			entity1.frame();
+			for (let j = i + 1; j < this.movableEntities.length; j++) {
 				// Verify collision between all game objects
 				const entity2 = this.movableEntities[j];
 				this.verifyForCollision(entity1, entity2);
 			}
-
+			
 			let dist = entity1.distanceFromCenter();
-
+			
 			if(entity1 instanceof Player) {
 				if(dist < 300 && dist > 201)  
-					document.getElementById('arena-line').style.border = ' 5px solid rgb(200, 30, 30)';
+				document.getElementById('arena-line').style.border = ' 5px solid rgb(200, 30, 30)';
 				else if(dist > 300) {
 					entity1.gameOverFunction();
 				}
@@ -161,29 +164,31 @@ class Map {
 					document.getElementById('arena-line').style.border = ' 1px solid rgb(255, 255, 255)';
 				}
 			}	
-
+			
 			// if the entity is too far from the center, delete it to conserve processing power.
 			if (entity1.distanceFromCenter() > 300) {
 				entity1.delete();		
 			}
 		}
-
+		
+		setTimeout(() => {
 		// Once the physics has been calculated, and collisions have been checked,
 		// see if any asteroid shouold spawn
 		if (this.shouldAsteroidSpawn()) {
 			// pick a random position for the asteroid
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
-
+			
 			// create the asteroid
 			new Asteroid(this.containerElement, this, position);
 		}
-
+		
 		if (this.shouldBonusSpawn()) {
 			// pick a random position for the asteroid
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
-
+			
 			// create the bonus
 			new Bonus(this.containerElement, this, position);
 		}
-	}
+		}, 300);
+}
 }

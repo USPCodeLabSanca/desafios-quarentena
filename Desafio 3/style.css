@@ -54,6 +54,7 @@ body, html {
 	position: absolute;
 }
 
+/* Desafio 3 - Bonus 1 */
 .yellow {
 	filter: contrast(0) sepia(100%) hue-rotate(16deg) brightness(1.4) saturate(4.28);
 }
@@ -72,7 +73,27 @@ body, html {
 	color: white;
 	margin-bottom: 15px;
 }
-
 .shine {
 	box-shadow: 0px 0px 5px 8px yellow;
+}
+
+.restart {
+	color: rgb(10, 59, 124);
+	background-color: rgb(133, 133, 177);
+	width: 20vw;
+	height: 20vh;
+	text-align: center;
+	justify-content: center;
+	border-radius: 20px;
+	padding: 20px;
+	font-weight: bolder;
+}
+
+.reload img {
+	width: 35%;
+	height: 50%;
+	margin: auto;
+	z-index: 5;
+	padding: 10px;
+	/* background-image: url('assets/reload.png'); */
 }

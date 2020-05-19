@@ -120,20 +120,21 @@ class Asteroid extends MovableEntity {
 		
 		// If objcted collided with bullet, show gif explosion
 		if (this.life <= 0) {
-			this.setElement(`url('assets/explosion.gif')`, this.size * 4, '');
+			this.setElement(`url('assets/explosion.gif')`, this.size * 3, '');
+			let flag = (this.size > MAX_ASTEROID_SIZE / 2)? true : false;
 			this.size = 0;
 			setTimeout(() => {
 				// If was a big asteroid, then release anothe one with half of max size and one life.
 				// spawn asteroid
-				if(this.size > MAX_ASTEROID_SIZE / 2) {
-					this.life = 1;
+				// Desafio 3 - Bonus 2
+				if(flag) {
+					this.life = 2;
 					this.size = MAX_ASTEROID_SIZE / 3;
 					this.setElement(`url('assets/asteroid-4_invert.svg')`, this.size, 'red');
 				} else {
 			 		this.mapInstance.removeEntity(this);
 					this.delete();
 				}
-
 			}, 100);
 		}
 	}

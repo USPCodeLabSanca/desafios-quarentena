@@ -1,3 +1,5 @@
+// Desafio 3 - Bonus 3
+// This is a bonus a player can take to mdify bullets
 const BONUS_SIZE = 25;
 
 /**

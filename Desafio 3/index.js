@@ -37,6 +37,12 @@ document.body.addEventListener('keydown', event => {
 	pressedKeys[event.key] = true;
 });
 
+// This function will run every time the player click
+// esafio 3 - Bonus 6
+document.body.addEventListener('mousedown', event => {
+	player.shoot();
+});
+
 // This function will run every time the player releases a key
 document.body.addEventListener('keyup', event => {
 	// removes the pressed key to the pressedKey dictionary
@@ -52,5 +58,21 @@ const intervalHandler = setInterval(frame);
 function gameOver () {
 	// This will unregister the frame function, so nothing else will be updated
 	clearInterval(intervalHandler);
-	alert('Você perdeu, precione F5 para jogar novamente.');
+	//alert('Você perdeu, precione F5 para jogar novamente.');
+	let reloadButton = document.createElement('div');
+	reloadButton.classList.add('reload');
+	reloadButton.style.zIndex = 3;
+	reloadButton.innerHTML = '<img src="assets/reload.png">';
+	reloadButton.addEventListener('click', () => {
+			window.location.reload();
+	});
+
+	let restartGame = document.createElement('div');
+	restartGame.classList.add("restart");
+	restartGame.style.zIndex = 2;
+	restartGame.innerHTML = '<img href="assets/reload.png"></img>';
+	restartGame.innerText = "GAME OVER, BABY!";
+	restartGame.appendChild(reloadButton);
+
+	document.getElementById('arena-line').appendChild(restartGame);
 }

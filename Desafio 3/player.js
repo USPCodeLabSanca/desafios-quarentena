@@ -46,6 +46,8 @@ class Player extends MovableEntity {
 		this.rootElement.style.backgroundSize = this.size + 'px';
 	}
 
+	// Desafio 3 - Bonus 4
+	// the player can move!
 	/**
 	* Will rotate the player's model
 	* @argument { number } degrees
