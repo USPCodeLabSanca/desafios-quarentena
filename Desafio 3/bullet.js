@@ -80,6 +80,7 @@ class Bullet extends MovableEntity {
 			break;
 		}
 
+		// effect of ball
 		setTimeout(() => {
 			Bullet.defaultBall();
 			REFLECT = false;

@@ -22,7 +22,7 @@ Você pode ver o jogo <a href="https://asteroids-codelab.netlify.app/">aqui</a>.
   - <a href = 'https://ucl-sanca.xyz/Web-Development-Studies'>Material JS treinamento Semcomp</a>
   - <a href = 'https://ucl-sanca.xyz/aulas-codelab'> Aulas do Codeleb 2019.2 </a>
 ## Entrega
-Zipe seus arquivos e envie no <a href = 'https://forms.gle/Dxgup3w1ECknsQgJ6'> Form </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal e nos envie o link! Ou então, realize o **Desafio bônus 6**.
+Zipe seus arquivos e envie no <a href = 'https://forms.gle/bCZRPDzRN2yLjjtB8'> Form </a>. Caso tenha mais de 10mb, coloque-o público em seu drive pessoal e nos envie o link! Ou então, realize o **Desafio bônus 6**.
 
 - **Desafio bônus 6:** Crie um Github. Realize um `fork` no <a href = 'https://github.com/USPCodeLabSanca/desafios-quarentena'>nosso projeto do github</a> para assim criar uma cópia do mesmo na sua conta.
 

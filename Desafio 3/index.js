@@ -31,7 +31,8 @@ const pressedKeys = {};
 // This function will run every time the player presses a key
 document.body.addEventListener('keydown', event => {
 	// if that key is the spacebar, the player will shoot.
-	if (event.key === ' ' && !pressedKeys[' ']) player.shoot();
+	if (event.key === ' ' && !pressedKeys[' ']) 
+		player.shoot();
 
 	// add the pressed key to the pressedKey dictionary
 	pressedKeys[event.key] = true;
@@ -41,11 +42,16 @@ document.body.addEventListener('keydown', event => {
 // esafio 3 - Bonus 6
 document.body.addEventListener('mousedown', event => {
 	player.shoot();
+	pressedKeys[event.key] = true;
 });
 
 // This function will run every time the player releases a key
 document.body.addEventListener('keyup', event => {
 	// removes the pressed key to the pressedKey dictionary
+	delete pressedKeys[event.key];
+});
+
+document.body.addEventListener('mouseup', event => {
 	delete pressedKeys[event.key];
 });
 

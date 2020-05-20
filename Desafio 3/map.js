@@ -113,7 +113,7 @@ class Map {
 	shouldAsteroidSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = Math.min(0.009, 0.004 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000);
+		const asteroidSpawnChance = Math.min(0.09, 0.003 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000);
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -125,7 +125,7 @@ class Map {
 	shouldBonusSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.0005 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = 0.0001 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -167,11 +167,11 @@ class Map {
 			
 			// if the entity is too far from the center, delete it to conserve processing power.
 			if (entity1.distanceFromCenter() > 300) {
+				this.removeEntity(entity1);
 				entity1.delete();		
 			}
 		}
-		
-		setTimeout(() => {
+		//setTimeout(() => {
 		// Once the physics has been calculated, and collisions have been checked,
 		// see if any asteroid shouold spawn
 		if (this.shouldAsteroidSpawn()) {
@@ -189,6 +189,6 @@ class Map {
 			// create the bonus
 			new Bonus(this.containerElement, this, position);
 		}
-		}, 300);
+		//}, 300);
 }
 }

@@ -21,7 +21,7 @@ class Asteroid extends MovableEntity {
 	) {
 		const size = Asteroid.getRandomSize();
 		const direction = Asteroid.getRandomDirection();
-		const velocity = (-1.2/(size*size));
+		const velocity = (-5.0/(size*size));
 
 		const colors = ['yellow', 'red', 'blue', 'red',  'blue'];
 
