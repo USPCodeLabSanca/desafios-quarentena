@@ -113,7 +113,7 @@ class Map {
 	shouldAsteroidSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = Math.min(0.09, 0.003 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000);
+		const asteroidSpawnChance = Math.min(0.009, 0.002 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000);
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -125,7 +125,7 @@ class Map {
 	shouldBonusSpawn () {
 		// Note that the formula considers how long the gave have been going.
 		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.0001 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		const asteroidSpawnChance = 0.00001 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
 		return Math.random() < asteroidSpawnChance;
 	}
@@ -155,11 +155,16 @@ class Map {
 			let dist = entity1.distanceFromCenter();
 			
 			if(entity1 instanceof Player) {
+				// If the player is near board, the line of area turn to red. (danfer zone)
 				if(dist < 300 && dist > 201)  
 				document.getElementById('arena-line').style.border = ' 5px solid rgb(200, 30, 30)';
+				
+				// if the player goes out area line, then game over. (no regrets zone) 
 				else if(dist > 300) {
 					entity1.gameOverFunction();
 				}
+
+				// restore color of area line to white. (safe zone)
 				else {
 					document.getElementById('arena-line').style.border = ' 1px solid rgb(255, 255, 255)';
 				}
@@ -171,15 +176,16 @@ class Map {
 				entity1.delete();		
 			}
 		}
-		//setTimeout(() => {
+		
 		// Once the physics has been calculated, and collisions have been checked,
 		// see if any asteroid shouold spawn
 		if (this.shouldAsteroidSpawn()) {
+
 			// pick a random position for the asteroid
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
 			
 			// create the asteroid
-			new Asteroid(this.containerElement, this, position);
+			//new Asteroid(this.containerElement, this, position);
 		}
 		
 		if (this.shouldBonusSpawn()) {
@@ -187,8 +193,7 @@ class Map {
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
 			
 			// create the bonus
-			new Bonus(this.containerElement, this, position);
+			//new Bonus(this.containerElement, this, position);
 		}
-		//}, 300);
 }
 }

@@ -41,7 +41,7 @@ class Bullet extends MovableEntity {
 
 	// Custom shoots
 	static bonusLazyBall() {
-		BULLET_SPEED = 0.01;
+		BULLET_SPEED = 0.02;
 		BULLET_SIZE = 10;
 	}
 
@@ -51,6 +51,7 @@ class Bullet extends MovableEntity {
 	}
 
 	static bonusBigBall() {
+		BULLET_SPEED = 9;
 		BULLET_SIZE = 40;
 	}
 
@@ -89,6 +90,7 @@ class Bullet extends MovableEntity {
 
 	// If the bullet collides with an asteroid, delete the bullet.
 	collided (object) {
+		if(object instanceof Player || object instanceof Bullet) return;
 		this.mapInstance.removeEntity(this);
 		this.delete();
 	}
