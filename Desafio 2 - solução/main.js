@@ -1,3 +1,6 @@
+const STARTING_LIFE_COUNT = 3;
+const LifeIndicatorElement = document.getElementById('life-indicator');
+
 const CellColors = [
 	'transparent',
 	'blue',
@@ -70,6 +73,8 @@ class Map {
 		this.hasMapBeenClickedYet = false;
 		this.isGameOver = false;
 		this.visibleCells = 0;
+		this.lives = STARTING_LIFE_COUNT;
+		LifeIndicatorElement.innerText = this.lives;
 
 		for (let row = 0; row < height; row ++) {
 			this.cells.push([]);
@@ -136,6 +141,13 @@ class Map {
 		}
 	}
 
+	clickedBomb (cell) {
+		cell.element.style.backgroundColor = 'red';
+		this.lives--;
+		LifeIndicatorElement.innerText = this.lives;
+		if (this.lives <= 0) this.gameOver();
+	}
+
 	// Funtion called when player left clicks a cell
 	cellLeftClick (clickedCell) {
 		if (this.isGameOver) return;
@@ -146,11 +158,7 @@ class Map {
 			this.placeAllNumbersInMap();
 			this.hasMapBeenClickedYet = true;
 		}
-		if (clickedCell.isBomb) {
-			clickedCell.element.style.backgroundColor = 'red';
-			this.gameOver();
-			return;
-		}
+		if (clickedCell.isBomb) this.clickedBomb(clickedCell);
 		clickedCell.reveal();
 		this.visibleCells ++;
 		if (this.didPlayerWin()) {
@@ -158,7 +166,7 @@ class Map {
 		}
 
 		// If the cell is empty, open all surrounding cells.
-		if (clickedCell.value === 0 && !clickedCell.isFlagged) {
+		if (!clickedCell.isBomb && clickedCell.value === 0 && !clickedCell.isFlagged) {
 			this.forEachNeighbor(clickedCell, cell => this.cellLeftClick(cell));
 		}
 	}
