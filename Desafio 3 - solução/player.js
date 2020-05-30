@@ -1,3 +1,4 @@
+const ScoreTextElement = document.getElementById('score-text');
 const PLAYER_SIZE = 20;
 
 /**
@@ -12,6 +13,10 @@ const PLAYER_SIZE = 20;
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
 */
 class Player extends MovableEntity {
+	/**
+	* @type { Player }
+	*/
+	static instance = null;
 
 	/**
 	* @argument { HTMLDivElement } containerElement The HTML element in which the player
@@ -43,6 +48,19 @@ class Player extends MovableEntity {
 		// Assigns the player's image to it's element
 		this.rootElement.style.backgroundImage = "url('assets/player.svg')";
 		this.rootElement.style.backgroundSize = this.size + 'px';
+
+		this.score = 0;
+
+		Player.instance = this;
+	}
+
+	set score (newScore) {
+		this._score = newScore;
+		ScoreTextElement.innerText = this.score;
+	}
+
+	get score () {
+		return this._score;
 	}
 
 	/**

@@ -1,3 +1,5 @@
+const TimeTextElement = document.getElementById('time-text');
+
 /**
 * This is a class declaration
 * This class is responsible for defining the Map behavior
@@ -6,6 +8,10 @@
 * https://en.wikipedia.org/wiki/Singleton_pattern
 */
 class Map {
+	/**
+	* @type { Map }
+	*/
+	static instance = null;
 
 	/**
 	* @argument { HTMLDivElement } containerElement
@@ -20,6 +26,8 @@ class Map {
 
 		// This is to allow for the map to set it's difficulty based on the game's time length
 		this.gameStartTimestamp = Date.now();
+
+		Map.instance = this;
 	}
 
 	/**
@@ -113,5 +121,8 @@ class Map {
 			// create the asteroid
 			new Asteroid(this.containerElement, this, position);
 		}
+
+		const secondsPassed = Math.floor((Date.now() - this.gameStartTimestamp) / 1000);
+		TimeTextElement.innerText = secondsPassed;
 	}
 }

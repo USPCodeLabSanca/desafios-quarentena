@@ -8,8 +8,14 @@ body, html {
 	overflow: hidden;
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 #root {
-	height: 100%;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -34,4 +40,22 @@ body, html {
 
 .movable-entity {
 	position: absolute;
+}
+
+#hud {
+	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+}
+
+#score, #time {
+	display: flex;
+	align-items: center;
+	margin: 0 16px;
+}
+
+#score > img, #time > img {
+	width: 30px;
+	height: 30px;
+	margin-right: 8px;
 }
