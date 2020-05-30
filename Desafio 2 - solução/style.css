@@ -1,0 +1,43 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+#root {
+	display: grid;
+	justify-content: center;
+	justify-items: center;
+	align-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.cell {
+	width: 15px;
+	height: 15px;
+	border: 1px solid black;
+	user-select: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-size: cover;
+}
+
+.hidden {
+	cursor: pointer;
+	background-color: lightslategray;
+}
+
+.bomb {
+	background-image: url('assets/bomb.png');
+}
+
+.flag {
+	background-image: url('assets/flag.png');
+}
+
+.revealed {
+	cursor: default;
+}
