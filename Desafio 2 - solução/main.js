@@ -186,6 +186,7 @@ class Map {
 			for (let column = 0; column < this.width; column ++) {
 				const cell = this.cells[row][column];
 				if (cell.isBomb && !cell.isFlagged) cell.reveal();
+				if (cell.isFlagged && !cell.isBomb) cell.element.style.backgroundColor = "indianred";
 			}
 		}
 		this.isGameOver = true;

@@ -15,7 +15,7 @@ Felizmente, as alterações feitas ainda não foram para produção e o jogo com
 - **Desafio 1:** A função `toggleFlag()` foi implementada, e o jogo voltou a funcionar!
 - **Desafio Bônus 1:** Um sistema de vidas foi implementado, permitindo o jogador a errar até duas vezes sem perder o jogo.
 - **Desafio Bônus 2:** Foi criado um menu, que permite escolher a dificuldade do nivel
-- **Desafio Bônus 3:** Faça com que seja possível saber se as bandeiras colocadas estavam em lugares certos.
+- **Desafio Bônus 3:** Quando o jogo acaba, todas as bandeiras que foram incorretamente colocadas recebem um fundo vermelho como indicador.
 - **Desafio Bônus 4:** Foi criado um menu, que permite escolher a dificuldade do nivel
 
 .1 Materiais de apoio sobre HTML, CSS e JS:
