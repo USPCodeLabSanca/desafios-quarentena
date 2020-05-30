@@ -48,13 +48,17 @@ class Cell {
 		this.visited = true;
 	}
 
-  // *************************************************************************************
-  // Here you need to implement toggleFlag function that depending on isFlagged variable
-  // will apply or remove the css class 'flag' from the this instantite element
-  // and will invert the flag
-  // (This function is called inside cellRightClick function that are in the Map class,
-  // you dont need to worry with that)
-  // *************************************************************************************
+	/**
+	* Challenge done! ToggleFlag implemented.
+	*/
+	toggleFlag () {
+		this.isFlagged = !this.isFlagged;
+		if (this.isFlagged) {
+			this.element.classList.add('flag');
+		} else {
+			this.element.classList.remove('flag');
+		}
+	}
 }
 
 class Map {
