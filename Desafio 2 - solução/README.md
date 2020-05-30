@@ -14,9 +14,9 @@ Felizmente, as alterações feitas ainda não foram para produção e o jogo com
 
 - **Desafio 1:** A função `toggleFlag()` foi implementada, e o jogo voltou a funcionar!
 - **Desafio Bônus 1:** Um sistema de vidas foi implementado, permitindo o jogador a errar até duas vezes sem perder o jogo.
-- **Desafio Bônus 2:** Crie uma outra página com um menu de níveis. Cada nível tem uma quantidade de bombas diferente.
+- **Desafio Bônus 2:** Foi criado um menu, que permite escolher a dificuldade do nivel
 - **Desafio Bônus 3:** Faça com que seja possível saber se as bandeiras colocadas estavam em lugares certos.
-- **Desafio Bônus 4:** Adicione tamanhos diferentes para o campo minado no menu.
+- **Desafio Bônus 4:** Foi criado um menu, que permite escolher a dificuldade do nivel
 
 .1 Materiais de apoio sobre HTML, CSS e JS:
   - <a href = 'https://ucl-sanca.xyz/Web-Development-Studies'>Material JS treinamento Semcomp</a>

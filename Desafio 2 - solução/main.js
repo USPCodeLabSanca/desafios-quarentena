@@ -192,5 +192,8 @@ class Map {
 	}
 }
 
-// Instantiate a Map object
-new Map(document.getElementById('root'), 50, 30, 300);
+const url = new URL(location.href);
+const difficulty = url.searchParams.get('difficulty');
+if (difficulty === 'easy') new Map(document.getElementById('root'), 10, 5, 5);
+if (difficulty === 'medium') new Map(document.getElementById('root'), 15, 10, 30);
+if (difficulty === 'hard') new Map(document.getElementById('root'), 50, 30, 300);
