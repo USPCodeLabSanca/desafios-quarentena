@@ -31,7 +31,7 @@ class Hook extends MovableEntity {
 	constructor (
 		containerElement,
 		initialPosition,
-		onGoldDelivered,
+		onObjectDelivered,
 	) {
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
@@ -40,7 +40,7 @@ class Hook extends MovableEntity {
 
 		this.containerElement = containerElement;
 		this.originPosition = this.position.duplicate();
-		this.onGoldDelivered = onGoldDelivered;
+		this.onObjectDelivered = onObjectDelivered;
 
 		// Assigns the hook's image to it's element
 		this.rootElement.style.backgroundImage = "url('assets/hook.svg')";
@@ -206,10 +206,11 @@ class Hook extends MovableEntity {
 		while(this.chains.length > 0) this.removeLastChain();
 
 		if (this.hookedObject) {
-			if (this.hookedObject instanceof Gold) {
-				// Gold was brought back! call the gold delivery callback.
-				this.onGoldDelivered(this.hookedObject);
+			if (this.hookedObject instanceof Gold || this.hookedObject instanceof Rock) {
+				// Element was brought back! call the gold or rock delivery callback.
+				this.onObjectDelivered(this.hookedObject);
 			}
+
 			// removes forever the object that was pulled.
 			this.hookedObject.delete();
 			this.hookedObject = null;

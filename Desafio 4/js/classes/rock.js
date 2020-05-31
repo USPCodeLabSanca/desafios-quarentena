@@ -1,8 +1,11 @@
+const MIN_ROCK_SCORE = 0;
+const MAX_ROCK_SCORE = 1;
+
 const MAX_ROCK_SIZE = 50;
 const MIN_ROCK_SIZE = 20;
 
-const MIN_ROCK_SPEED_MULTIPLIER = 0.7;
-const MAX_ROCK_SPEED_MULTIPLIER = 0.2;
+const MIN_ROCK_SPEED_MULTIPLIER = 1.7;
+const MAX_ROCK_SPEED_MULTIPLIER = 1.2;
 
 /**
 * This is a class declaration
@@ -40,6 +43,17 @@ class Rock extends Entity {
 
 		// Add element to rocks list, for easier tracking.
 		Rock.allRockElements.push(this);
+	}
+
+	/**
+	* Calculates how many points should the player get for pulling this rock.
+	* @returns { number } The score
+	*/
+	calculateScore () {
+		const size = Math.max(this.size.x, this.size.y);
+		const sizePercentage = (size - MIN_ROCK_SCORE) / (MAX_ROCK_SIZE - MIN_ROCK_SIZE);
+		const score = sizePercentage * (MAX_ROCK_SCORE - MIN_ROCK_SCORE) + MIN_ROCK_SCORE;
+		return Math.round(score);
 	}
 
 	/**

@@ -14,6 +14,8 @@ body, html {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: brown;
+
 }
 
 #arena-line {
@@ -32,6 +34,7 @@ body, html {
 }
 
 .movable-entity, .entity {
+	background-color: white;
 	position: absolute;
 }
 
@@ -50,4 +53,29 @@ body, html {
 
 .text-center {
 	text-align: center;
+}
+
+.gameover {
+	position: absolute;
+	color: rgb(218, 204, 11);
+	background-color: rgb(126, 99, 10);
+	width: 400px;
+	height: 410ṕx;
+	text-align: center;
+	border-radius: 20px;
+	padding: 20px;
+	font-weight: bolder;
+}
+
+.gameover h1, p {
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif	;
+}
+
+.reload img {
+	position: relative;
+	width: 40%;
+	height: 40%;
+	margin: auto;
+	padding: 10px;
+	filter: contrast(0) sepia(100%) hue-rotate(16deg) brightness(1.4) saturate(4.28);
 }

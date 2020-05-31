@@ -4,8 +4,8 @@ const MIN_GOLD_SIZE = 20;
 const MIN_GOLD_SCORE = 1;
 const MAX_GOLD_SCORE = 3;
 
-const MIN_GOLD_SPEED_MULTIPLIER = 1.0;
-const MAX_GOLD_SPEED_MULTIPLIER = 0.7;
+const MIN_GOLD_SPEED_MULTIPLIER = 2.0;
+const MAX_GOLD_SPEED_MULTIPLIER = 2.7;
 
 /**
 * This is a class declaration

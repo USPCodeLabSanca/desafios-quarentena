@@ -4,6 +4,11 @@ const FLOOR_HEIGHT = -100;
 const BASE_SCORE_FOR_NEXT_LEVEL = 5;
 const BASE_NUMBER_OF_ROCKS = 2;
 
+const STATE_PLAYING = 0;
+const STATE_LEVELUP = 1;
+
+let STATE = STATE_PLAYING;
+
 /**
 * This is a class declaration
 * This class is responsible for defining the GameMap behavior
@@ -24,7 +29,7 @@ class GameMap extends Entity {
 	/**
 	* @argument { HTMLDivElement } containerElement
 	*/
-	constructor (containerElement) {
+	constructor (containerElement, gameOverFunction) {
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
@@ -34,12 +39,17 @@ class GameMap extends Entity {
 		this.rootElement.style.border = '1px solid black';
 		this.floor = new Entity(containerElement, new Vector(MAP_SIZE.x, 1), new Vector(0, FLOOR_HEIGHT));
 		this.floor.rootElement.style.border = '1px solid black';
-		this.floor.rootElement.style.zIndex = '1';
+		this.floor.rootElement.style.zIndex = '2';
+
 		// The current game level. Will increase when player captures enough gold
 		this.level = 0;
 
 		this.initializeLevel();
+				
+		// The function which stop the game
+		this.gameOverFunction = gameOverFunction;
 
+		new InfoGame(this.containerElement);
 		GameMap.instance = this;
 	}
 
@@ -47,8 +57,6 @@ class GameMap extends Entity {
 	* Will initialize the whole level, creating all golds and rocks
 	*/
 	initializeLevel () {
-		new InfoGame(this.containerElement);
-
 		while (this.getCurrentGoldScoreInMap() < this.calculateTotalGoldScore()) {
 			this.generateItem('gold');
 		}
@@ -59,6 +67,8 @@ class GameMap extends Entity {
 	}
 
 	nextLevel () {
+		// This markup the state upgrating
+		STATE = STATE_LEVELUP;
 		this.level++;
 		InfoGame.atualizarLevel(this.level);
 		
@@ -71,6 +81,9 @@ class GameMap extends Entity {
 			Gold.allGoldElements.forEach(gold => gold.delete());
 			Rock.allRockElements.forEach(rock => rock.delete());
 			this.initializeLevel();
+
+			// This markup th state playing on game
+			STATE = STATE_PLAYING;
 		}, 1000);
 	}
 
@@ -184,8 +197,12 @@ class GameMap extends Entity {
 	/**
 	 * End of game: There is no gold on field and player still don't pass level
 	 */
-	gameOver () {
-		console.log(Gold.allGoldElements);
+	isGameOver () {
+		if (STATE === STATE_PLAYING && InfoGame.score < this.calculateMinimumScore(this.level)
+			&& Gold.allGoldElements.length === 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	/*
@@ -197,6 +214,11 @@ class GameMap extends Entity {
 	* allow for behavior extension.
 	*/
 	frame () {
+
+		// End game for Player
+		if(this.isGameOver())
+			this.gameOverFunction();
+
 		// Call the frame function on all movableEntities
 		MovableEntity.runAllFrameFunctions();
 

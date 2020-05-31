@@ -40,28 +40,33 @@ class Player extends Entity {
 		// The onGoldHooked.bind is a function that will bind the `this` variable to it's
 		// proper value. If you'd like to know more about this, see this link
 		// https://www.freecodecamp.org/news/function-prototype-bind-and-function-prototype-length-in-javascript-explained/
-		this.hook = new Hook(containerElement, hookPosition, this.onGoldHooked.bind(this));
+		this.hook = new Hook(containerElement, hookPosition, this.onHooked.bind(this));
 
 		// Will hold the player's total score.
 	    this.score = 0;
 
 		// Will holde the player's dinamit amount
-		this.dinamits = 3;
+		this.dinamits = 10;
 
 		Player.instance = this;
+
 	}
 
 	/**
 	* This funtion will be called whenever the hook catches gold, and it updates the
 	* player's total score
-	* @argument { Gold } goldElement
+	* @argument { Gold | Rock } element
 	*/
-	onGoldHooked (goldElement) {
-		this.score += goldElement.calculateScore();
+	onHooked (element) {
+		if(element instanceof Gold)
+			this.score += element.calculateScore();
+		else if(element instanceof Rock)
+			this.score -= element.calculateScore();
+
 		InfoGame.atualizaScore(this.score);
 		GameMap.instance.verifyIfLevelIsOver();
-		GameMap.instance.gameOver();
 	}
+
 
 	throwHook () {
 		this.hook.throw();
