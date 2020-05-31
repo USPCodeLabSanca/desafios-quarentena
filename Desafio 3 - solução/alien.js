@@ -59,7 +59,7 @@ class Alien extends MovableEntity {
 
 	lookAtPlayer () {
 		const diff = Player.instance.position.subtract(this.position);
-		this.setDirection(diff.rotate(90));
+		this.setDirection(diff.rotate(Math.PI / 2));
 	}
 
 	moveTowardsPlayer () {
