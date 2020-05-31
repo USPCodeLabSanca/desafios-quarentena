@@ -1,8 +1,8 @@
 const MIN_ROCK_SCORE = 0;
 const MAX_ROCK_SCORE = 1;
 
-const MAX_ROCK_SIZE = 50;
-const MIN_ROCK_SIZE = 20;
+const MAX_ROCK_SIZE = 65;
+const MIN_ROCK_SIZE = 30;
 
 const MIN_ROCK_SPEED_MULTIPLIER = 1.7;
 const MAX_ROCK_SPEED_MULTIPLIER = 1.2;

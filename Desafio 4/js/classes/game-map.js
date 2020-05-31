@@ -2,11 +2,11 @@ const MAP_SIZE = new Vector(400, 400);
 const FLOOR_HEIGHT = -100;
 
 const BASE_SCORE_FOR_NEXT_LEVEL = 5;
-const BASE_NUMBER_OF_ROCKS = 2;
+const BASE_NUMBER_OF_ROCKS = 3;
 const BASE_NUMBER_OF_DINAMITS = 1;
 
-const STATE_PLAYING = 0;
-const STATE_LEVELUP = 1;
+const STATE_PLAYING = 0;	// the play state
+const STATE_LEVELUP = 1;	// the time between the levels (all object are remove ans instancite of map)
 
 let STATE = STATE_PLAYING;
 
@@ -49,13 +49,15 @@ class GameMap extends Entity {
 				
 		// The function which stop the game
 		this.gameOverFunction = gameOverFunction;
-
+	 
+		// load the Score on GameMap
 		new InfoGame(this.containerElement);
+		
 		GameMap.instance = this;
 	}
 
 	/**
-	* Will initialize the whole level, creating all golds and rocks
+	* Will initialize the whole level, creating all golds, rocks and dinamits
 	*/
 	initializeLevel () {
 		while (this.getCurrentGoldScoreInMap() < this.calculateTotalGoldScore()) {
@@ -66,11 +68,13 @@ class GameMap extends Entity {
 			this.generateItem('rock');
 		}
 
-		for (let i = 0; i < this.calculateNumberOfDinamits(); i ++) {
-			this.generateItem('dinamit');
-		}
+		// by level only one dinamit is generate
+		this.generateItem('dinamit');
 	}
 
+	/**
+	 * This function load th golds, rocks and dinamits
+	 */ 
 	nextLevel () {
 		// This markup the state upgrating
 		STATE = STATE_LEVELUP;
@@ -85,6 +89,7 @@ class GameMap extends Entity {
 			this.floor.rootElement.innerHTML = ''; // remove text
 			Gold.allGoldElements.forEach(gold => gold.delete());
 			Rock.allRockElements.forEach(rock => rock.delete());
+			Dinamit.allDinamitElements.forEach(dinamit => dinamit.delete());	
 			this.initializeLevel();
 
 			// This markup th state playing on game
@@ -113,14 +118,7 @@ class GameMap extends Entity {
 	* calculates the number of rocks the level should have
 	*/
 	calculateNumberOfRocks () {
-		return BASE_NUMBER_OF_ROCKS + this.level * 3;
-	}
-
-	/**
-	* calculates the number of dinamits the level should have
-	*/
-	calculateNumberOfDinamits () {
-		return BASE_NUMBER_OF_DINAMITS + this.level;
+		return BASE_NUMBER_OF_ROCKS + this.level * 5;
 	}
 
 	/**

@@ -10,6 +10,7 @@ const MAX_DINAMIT_SPEED_MULTIPLIER = 2.7;
 /**
 * This is a class declaration
 * This class is responsible for defining the DINAMIT behavior
+* Dinamits are used to drop the current hooked objetc when pressed key 'e'.
 *
 * This class extends the Entity class, which is responsible for binding the element's
 * positons and directions. If you'd like to know more about class inheritance in javascript, see this link
@@ -30,7 +31,7 @@ class Dinamit extends Entity {
 		containerElement,
 		initialPosition,
 	) {
-		const size = Math.random() * (MAX_DINAMIT_SIZE - MIN_DINAMIT_SIZE) + MIN_DINAMIT_SIZE;
+		const size = Math.random() * (MAX_DINAMIT_SIZE - MIN_DINAMIT_SIZE) + MIN_DINAMIT_SIZE; // size of dinamit
 		const direction = Vector.random;
 
 		// The `super` function will call the constructor of the parent class.

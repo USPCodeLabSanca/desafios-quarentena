@@ -1,5 +1,6 @@
 const INITIAL_DINAMITS = 1;
-const INFOGAME_SIZE = new Vector(399, 50);;
+const INFOGAME_SIZE = new Vector(399, 50);
+
 /**
 * This is a class declaration
 * This class is responsible for defining the show Info Game Player, like score, level and itens.

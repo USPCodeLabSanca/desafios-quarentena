@@ -14,8 +14,6 @@ body, html {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: brown;
-
 }
 
 #arena-line {
@@ -37,7 +35,6 @@ body, html {
 .movable-entity, .entity {
 	background-color: rgba(255, 255, 255, 0);
 	position: absolute;
-	background-color: white;
 }
 
 .score {
