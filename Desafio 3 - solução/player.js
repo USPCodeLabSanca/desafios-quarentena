@@ -95,9 +95,10 @@ class Player extends MovableEntity {
 	/**
 	* This is only called if the player collides with an alien. Therefore,
 	* the game should end.
+	* @argument { MovableEntity } object
 	*/
-	collided () {
-		this.gameOverFunction();
+	collided (object) {
+		if (object instanceof Alien || object instanceof Facehugger) this.gameOverFunction();
 	}
 
 	/**

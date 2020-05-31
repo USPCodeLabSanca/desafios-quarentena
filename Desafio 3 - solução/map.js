@@ -66,10 +66,6 @@ class Map {
 	* @argument { MovableEntity } entity2
 	*/
 	verifyForCollision (entity1, entity2) {
-		if (entity1 instanceof Alien && entity2 instanceof Alien) return;
-		if (entity1 instanceof Player && entity2 instanceof Bullet) return;
-		if (entity1 instanceof Bullet && entity2 instanceof Player) return;
-
 		if (MovableEntity.didEntitiesColide(entity1, entity2)) {
 			entity1.collided(entity2);
 			entity2.collided(entity1);
@@ -118,8 +114,12 @@ class Map {
 			// pick a random position for the alien
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
 
-			// create the alien
-			new Alien(this.containerElement, this, position);
+			// create aliens
+			if (Math.random() < 0.5) {
+				new Alien(this.containerElement, this, position);
+			} else {
+				new Facehugger(this.containerElement, this, position);
+			}
 		}
 
 		const secondsPassed = Math.floor((Date.now() - this.gameStartTimestamp) / 1000);

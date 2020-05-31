@@ -40,7 +40,7 @@ class Bullet extends MovableEntity {
 
 	// If the bullet collides with an alien, delete the bullet.
 	collided (object) {
-		if (object instanceof Alien) {
+		if (object instanceof Alien || object instanceof Facehugger) {
 			this.mapInstance.removeEntity(this);
 			this.delete();
 		}
