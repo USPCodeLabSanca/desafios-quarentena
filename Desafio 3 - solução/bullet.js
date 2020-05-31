@@ -1,5 +1,5 @@
-const BULLET_SIZE = 10;
-const BULLET_SPEED = 1;
+const BULLET_SIZE = 20;
+const BULLET_SPEED = 5;
 
 /**
 * This is a class declaration

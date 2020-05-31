@@ -1,5 +1,5 @@
 const ScoreTextElement = document.getElementById('score-text');
-const PLAYER_SIZE = 20;
+const PLAYER_SIZE = 30;
 
 /**
 * This is a class declaration
@@ -46,7 +46,7 @@ class Player extends MovableEntity {
 		mapInstance.addEntity(this);
 
 		// Assigns the player's image to it's element
-		this.rootElement.style.backgroundImage = "url('assets/player.svg')";
+		this.rootElement.style.backgroundImage = "url('assets/player-0.png')";
 		this.rootElement.style.backgroundSize = this.size + 'px';
 
 		this.score = 0;
