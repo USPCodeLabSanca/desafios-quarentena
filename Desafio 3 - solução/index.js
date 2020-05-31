@@ -45,6 +45,8 @@ document.body.addEventListener('contextmenu', event => {
 
 // This function will run every time the player presses a key
 document.body.addEventListener('keydown', event => {
+	if (event.key === 'e') player.deploySentry();
+
 	// add the pressed key to the pressedKey dictionary
 	pressedKeys[event.key] = true;
 });

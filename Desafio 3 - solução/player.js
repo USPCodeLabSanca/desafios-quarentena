@@ -1,7 +1,9 @@
+const SentryCooldownTextElement = document.getElementById('sentry-cooldown-text');
 const ScoreTextElement = document.getElementById('score-text');
 const PLAYER_SIZE = 30;
 const WALKING_ANIMATION_FRAME_COUNT = 8;
 const TIME_BETWEEN_FRAMES = 100;
+const SENTRY_COOLDOWN = 60 * 1000; // 60 seconds
 
 /**
 * This is a class declaration
@@ -51,6 +53,7 @@ class Player extends MovableEntity {
 		mapInstance.addEntity(this);
 
 		this.rootElement.classList.add('player');
+		this.rootElement.style.zIndex = '1';
 
 		// Creates all of the player's walking frames.
 		for (let i = 0; i < WALKING_ANIMATION_FRAME_COUNT; i ++) {
@@ -64,6 +67,7 @@ class Player extends MovableEntity {
 		this.setWalkingAnimationframe(0);
 
 		this.score = 0;
+		this.lastSentryDeploy = 0;
 
 		Player.instance = this;
 	}
@@ -161,5 +165,21 @@ class Player extends MovableEntity {
 		this.walkingAnimationHandler = setTimeout(() => {
 			this.setWalkingAnimationframe(0);
 		}, 500);
+	}
+
+	frame () {
+		super.frame();
+		const timeRemaining = Math.floor((Date.now() - this.lastSentryDeploy));
+		if (timeRemaining <= SENTRY_COOLDOWN) {
+			SentryCooldownTextElement.innerText = Math.floor((SENTRY_COOLDOWN - timeRemaining) / 1000);
+		} else {
+			SentryCooldownTextElement.innerText = `Aperte 'e' para usar`;
+		}
+	}
+
+	deploySentry () {
+		if (Date.now() - this.lastSentryDeploy < SENTRY_COOLDOWN) return;
+		this.lastSentryDeploy = Date.now();
+		new Sentry(this.containerElement, this.mapInstance, this.position, this.direction);
 	}
 }
