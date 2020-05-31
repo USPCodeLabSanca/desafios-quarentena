@@ -17,10 +17,6 @@ const player = new Player(
 // This is the game frame function. It is responsible for updating everything in the game.
 function frame () {
 	map.frame();
-
-	// if the player is pressing one of the keys, call the turn function
-	if (pressedKeys['a'] || pressedKeys['ArrowLeft']) player.turn(-1);
-	if (pressedKeys['d'] || pressedKeys['ArrowRight']) player.turn(1);
 }
 
 // This is a dictionary that will hold the keys that are being held down at the time.
@@ -28,11 +24,18 @@ function frame () {
 // https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictionary-with-keyvalue-pairs
 const pressedKeys = {};
 
+document.body.addEventListener('mousemove', event => {
+	const mapOrigin = movableEntityContainer.getBoundingClientRect();
+	const mousePosition = new Vector(event.clientX - mapOrigin.left, event.clientY - mapOrigin.top);
+	player.updateMousePosition(mousePosition);
+});
+
+document.body.addEventListener('mousedown', event => {
+	player.shoot();
+});
+
 // This function will run every time the player presses a key
 document.body.addEventListener('keydown', event => {
-	// if that key is the spacebar, the player will shoot.
-	if (event.key === ' ' && !pressedKeys[' ']) player.shoot();
-
 	// add the pressed key to the pressedKey dictionary
 	pressedKeys[event.key] = true;
 });

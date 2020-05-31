@@ -85,4 +85,8 @@ class Player extends MovableEntity {
 	collided () {
 		this.gameOverFunction();
 	}
+
+	updateMousePosition (mousePosition) {
+		this.setDirection(mousePosition);
+	}
 }
