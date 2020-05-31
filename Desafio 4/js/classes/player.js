@@ -43,7 +43,10 @@ class Player extends Entity {
 		this.hook = new Hook(containerElement, hookPosition, this.onGoldHooked.bind(this));
 
 		// Will hold the player's total score.
-		//this.score = 0;
+	    this.score = 0;
+
+		// Will holde the player's dinamit amount
+		this.dinamits = 3;
 
 		Player.instance = this;
 	}
@@ -54,12 +57,21 @@ class Player extends Entity {
 	* @argument { Gold } goldElement
 	*/
 	onGoldHooked (goldElement) {
-		Score.atualizaScore(goldElement.calculateScore());
-		console.log('current player score is', Score.score);
+		this.score += goldElement.calculateScore();
+		InfoGame.atualizaScore(this.score);
 		GameMap.instance.verifyIfLevelIsOver();
+		GameMap.instance.gameOver();
 	}
 
 	throwHook () {
 		this.hook.throw();
+	}
+
+	releaseHook () {
+		// if there is no diminat to thow out
+		if(this.dinamits === 0) return;
+		this.dinamits--;
+		InfoGame.atualizarDinamite(this.dinamits);
+		this.hook.releaseHook();
 	}
 }

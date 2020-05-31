@@ -35,7 +35,6 @@ class GameMap extends Entity {
 		this.floor = new Entity(containerElement, new Vector(MAP_SIZE.x, 1), new Vector(0, FLOOR_HEIGHT));
 		this.floor.rootElement.style.border = '1px solid black';
 		this.floor.rootElement.style.zIndex = '1';
-
 		// The current game level. Will increase when player captures enough gold
 		this.level = 0;
 
@@ -48,7 +47,7 @@ class GameMap extends Entity {
 	* Will initialize the whole level, creating all golds and rocks
 	*/
 	initializeLevel () {
-		new Score(this.containerElement);
+		new InfoGame(this.containerElement);
 
 		while (this.getCurrentGoldScoreInMap() < this.calculateTotalGoldScore()) {
 			this.generateItem('gold');
@@ -60,12 +59,19 @@ class GameMap extends Entity {
 	}
 
 	nextLevel () {
-		this.level ++;
-		console.log('next level');
-		// Delete all remaining gold and rock elements
-		Gold.allGoldElements.forEach(gold => gold.delete());
-		Rock.allRockElements.forEach(rock => rock.delete());
-		this.initializeLevel();
+		this.level++;
+		InfoGame.atualizarLevel(this.level);
+		
+		// Show the message 'level up' in the map
+		this.floor.rootElement.innerHTML = `<h1>Level Up! ^.^</h1>`;
+
+		// Delete all remaining gold and rock elements after 1 second
+		setTimeout(() => {
+			this.floor.rootElement.innerHTML = ''; // remove text
+			Gold.allGoldElements.forEach(gold => gold.delete());
+			Rock.allRockElements.forEach(rock => rock.delete());
+			this.initializeLevel();
+		}, 1000);
 	}
 
 	/**
@@ -170,11 +176,18 @@ class GameMap extends Entity {
 	* If the player has a high enough score, generate the next level.
 	*/
 	verifyIfLevelIsOver () {
-		if (Player.instance.score >= this.calculateMinimumScore(this.level)) {
+		if (InfoGame.score >= this.calculateMinimumScore(this.level)) {
 			this.nextLevel();
 		}
 	}
 
+	/**
+	 * End of game: There is no gold on field and player still don't pass level
+	 */
+	gameOver () {
+		console.log(Gold.allGoldElements);
+	}
+	
 	/*
 	* This function should be executed every game frame. It will call all of it's
 	* movableObjects's frame functions (which will update their physics), and

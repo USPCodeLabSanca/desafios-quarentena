@@ -1,7 +1,7 @@
 const HOOK_SIZE = new Vector(20, 20);
-const THROW_SPEED = 0.5;
+const THROW_SPEED = 1.5;
 const BASE_HOOK_PULL_SPEED = 0.3;
-const EMPTY_HOOK_SPEED = 2.0;
+const EMPTY_HOOK_SPEED = 3.0;
 const CHAIN_SPACING = 7;
 const CHAIN_SIZE = 10;
 
@@ -210,6 +210,25 @@ class Hook extends MovableEntity {
 				// Gold was brought back! call the gold delivery callback.
 				this.onGoldDelivered(this.hookedObject);
 			}
+			// removes forever the object that was pulled.
+			this.hookedObject.delete();
+			this.hookedObject = null;
+		}
+	}
+
+
+	/**
+	* Release hook, stops the hook pulling state, and start the swinging one
+	*/
+	releaseHook () {
+		this.position = this.originPosition;
+		this.velocity = Vector.zero;
+		this.state = 'swinging';
+
+		// Remove all remaining chain links.
+		while(this.chains.length > 0) this.removeLastChain();
+
+		if (this.hookedObject) {
 			// removes forever the object that was pulled.
 			this.hookedObject.delete();
 			this.hookedObject = null;

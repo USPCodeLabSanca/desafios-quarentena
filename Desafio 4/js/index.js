@@ -11,6 +11,12 @@ function frame () {
 
 // This function will run every time the player presses a key
 document.body.addEventListener('keydown', event => {
+	
+	// If key is the spacebar and the hooked object is a rock or gold, the play can realese it in middle of the path,
+	if(event.key === 'e' && player.hook.hookedObject) {
+		player.releaseHook();
+	}
+	
 	// if that key is the spacebar, the player will try to throw it's hook.
 	if (event.key === ' ') player.throwHook();
 });

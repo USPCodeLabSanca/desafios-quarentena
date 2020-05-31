@@ -47,3 +47,7 @@ body, html {
 .score :first-child {
 	margin: 10px;
 }
+
+.text-center {
+	text-align: center;
+}
