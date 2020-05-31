@@ -39,6 +39,10 @@ document.body.addEventListener('mousedown', event => {
 	player.shoot();
 });
 
+document.body.addEventListener('contextmenu', event => {
+	event.preventDefault();
+});
+
 // This function will run every time the player presses a key
 document.body.addEventListener('keydown', event => {
 	// add the pressed key to the pressedKey dictionary

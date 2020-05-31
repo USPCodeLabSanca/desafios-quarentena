@@ -1,19 +1,15 @@
-const ASTEROID_SIZE = 40;
-
-const MIN_ASTEROID_LIFE = 1;
-const MAX_ASTEROID_LIFE = 3;
-
-const MAX_ASTEROID_ROTATION_SPEED = 1;
-const ASTEROID_SPEED = 0.5;
+const ALIEN_SIZE = 40;
+const ALIEN_LIFE = 2;
+const ALIEN_WALKING_SPEED = 0.5;
 
 /**
 * This is a class declaration
-* This class is responsible for defining the Asteroids's behavior.
+* This class is responsible for defining the Aliens's behavior.
 * this class extends the MovableEntity class, which is responsible for defining physics behavior
 * If you'd like to know more about class inheritance in javascript, see this link
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
 */
-class Asteroid extends MovableEntity {
+class Alien extends MovableEntity {
 	constructor (
 		containerElement,
 		mapInstance,
@@ -22,7 +18,7 @@ class Asteroid extends MovableEntity {
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
-		super(containerElement, ASTEROID_SIZE, initialPosition);
+		super(containerElement, ALIEN_SIZE, initialPosition);
 
 		this.mapInstance = mapInstance;
 
@@ -30,16 +26,16 @@ class Asteroid extends MovableEntity {
 		// in the `map.js` file
 		mapInstance.addEntity(this);
 
-		// initializes the asteroid's life to it's maximum.
-		this.life = 2;
+		// initializes the alien's life to it's maximum.
+		this.life = ALIEN_LIFE;
 
-		// Finds a random image to assign to the asteroid's element
+		// Finds a random image to assign to the alien's element
 		this.rootElement.style.backgroundImage = `url('assets/walking-alien.gif')`;
-		this.rootElement.style.backgroundSize = ASTEROID_SIZE + 'px';
+		this.rootElement.style.backgroundSize = ALIEN_SIZE + 'px';
 	}
 
 	/**
-	* Uppon collision with a bullet, reduces the asteroid's life. If the asteroid
+	* Uppon collision with a bullet, reduces the alien's life. If the alien
 	* has zero life, destroy it.
 	* @argument { MovableObject } object
 	*/
@@ -67,7 +63,7 @@ class Asteroid extends MovableEntity {
 	}
 
 	moveTowardsPlayer () {
-		const diff = Player.instance.position.subtract(this.position).normalize().scale(0.5);
+		const diff = Player.instance.position.subtract(this.position).normalize().scale(ALIEN_WALKING_SPEED);
 		this.position = this.position.add(diff);
 	}
 

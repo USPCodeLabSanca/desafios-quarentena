@@ -26,7 +26,7 @@ class Player extends MovableEntity {
 	* @argument { Map } mapInstance A reference to the game's map. It will be used
 	* to instantiate Bullet objects (see the `shoot` function below).
 	* @argument { Function } gameOverFunction A function to be called in case the
-	* player is hit by an asteroid (so, gameover).
+	* player is hit by an alien (so, gameover).
 	*/
 	constructor (
 		containerElement,
@@ -93,7 +93,7 @@ class Player extends MovableEntity {
 	}
 
 	/**
-	* This is only called if the player collides with an asteroid. Therefore,
+	* This is only called if the player collides with an alien. Therefore,
 	* the game should end.
 	*/
 	collided () {

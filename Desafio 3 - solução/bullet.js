@@ -38,9 +38,9 @@ class Bullet extends MovableEntity {
 		this.rootElement.style.backgroundSize = this.size + 'px';
 	}
 
-	// If the bullet collides with an asteroid, delete the bullet.
+	// If the bullet collides with an alien, delete the bullet.
 	collided (object) {
-		if (object instanceof Asteroid) {
+		if (object instanceof Alien) {
 			this.mapInstance.removeEntity(this);
 			this.delete();
 		}

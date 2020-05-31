@@ -58,7 +58,7 @@ class Map {
 
 	/**
 	* Checks if the two entities collidade, and if they did, call their `collided` method.
-	* It will ignore collisions between asteroids with asteroids and players with bullets.
+	* It will ignore collisions between aliens with aliens and players with bullets.
 	* the instanceof operator will check if an object was created by a class, or one of it's children.
 	* If you'd like to know more about the instanceof operator, see this link:
 	* https://www.geeksforgeeks.org/instanceof-operator-in-javascript/
@@ -66,7 +66,7 @@ class Map {
 	* @argument { MovableEntity } entity2
 	*/
 	verifyForCollision (entity1, entity2) {
-		if (entity1 instanceof Asteroid && entity2 instanceof Asteroid) return;
+		if (entity1 instanceof Alien && entity2 instanceof Alien) return;
 		if (entity1 instanceof Player && entity2 instanceof Bullet) return;
 		if (entity1 instanceof Bullet && entity2 instanceof Player) return;
 
@@ -77,15 +77,15 @@ class Map {
 	}
 
 	/**
-	* This function will check if an asteroid should spawn at the current game frame.
+	* This function will check if an alien should spawn at the current game frame.
 	* @returns { boolean }
 	*/
-	shouldAsteroidSpawn () {
+	shouldAlienSpawn () {
 		// Note that the formula considers how long the gave have been going.
-		// the longed the game, the higher the chance to spawn more asteroids.
-		const asteroidSpawnChance = 0.003 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
+		// the longed the game, the higher the chance to spawn more aliens.
+		const alienSpawnChance = 0.003 + Math.sqrt(Date.now() - this.gameStartTimestamp) / 10000000;
 
-		return Math.random() < asteroidSpawnChance;
+		return Math.random() < alienSpawnChance;
 	}
 
 	/*
@@ -113,13 +113,13 @@ class Map {
 		}
 
 		// Once the physics has been calculated, and collisions have been checked,
-		// see if any asteroid shouold spawn
-		if (this.shouldAsteroidSpawn()) {
-			// pick a random position for the asteroid
+		// see if any alien shouold spawn
+		if (this.shouldAlienSpawn()) {
+			// pick a random position for the alien
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
 
-			// create the asteroid
-			new Asteroid(this.containerElement, this, position);
+			// create the alien
+			new Alien(this.containerElement, this, position);
 		}
 
 		const secondsPassed = Math.floor((Date.now() - this.gameStartTimestamp) / 1000);
