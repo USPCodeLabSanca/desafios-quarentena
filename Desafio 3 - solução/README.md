@@ -1,6 +1,6 @@
 # Solução desafio #3 - Asteroids
 
-Você pode ver o jogo <a href="https://asteroids-codelab.netlify.app/">aqui</a>.
+Você pode ver o jogo <a href="https://asteroids-codelab-solved.netlify.app/">aqui</a>.
 
 - **Desafio 1:** Foi implementado um HUD acima do jogo, contendo informações sobre score e tempo.
 - **Desafio Bônus 1:** O tema do jogo foi mudado. Asteroides foram substituidos por aliens, e o jogador foi substituido por um astronauta
