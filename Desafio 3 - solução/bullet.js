@@ -13,17 +13,19 @@ class Bullet extends MovableEntity {
 	/**
 	* @argument { HTMLDivElement } containerElement The DOM element that will contain the bullet
 	* @argument { Map } mapInstance The map in which the bullet will spawn
+	* @argument { Vector } initialPosition The bullet's initial position
 	* @argument { Vector } direction The bullet's direction
 	*/
 	constructor (
 		containerElement,
 		mapInstance,
+		initialPosition,
 		direction
 	) {
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
-		super(containerElement, BULLET_SIZE, undefined, direction.normalize().scale(BULLET_SPEED), direction);
+		super(containerElement, BULLET_SIZE, initialPosition, direction.normalize().scale(BULLET_SPEED), direction);
 
 		this.mapInstance = mapInstance;
 

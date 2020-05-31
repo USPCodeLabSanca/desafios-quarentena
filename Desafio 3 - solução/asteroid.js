@@ -4,6 +4,7 @@ const MIN_ASTEROID_LIFE = 1;
 const MAX_ASTEROID_LIFE = 3;
 
 const MAX_ASTEROID_ROTATION_SPEED = 1;
+const ASTEROID_SPEED = 0.5;
 
 /**
 * This is a class declaration
@@ -21,7 +22,7 @@ class Asteroid extends MovableEntity {
 		// The `super` function will call the constructor of the parent class.
 		// If you'd like to know more about class inheritance in javascript, see this link
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Sub_classing_with_extends
-		super(containerElement, ASTEROID_SIZE, initialPosition, initialPosition.scale(-0.001), initialPosition.rotate(-90));
+		super(containerElement, ASTEROID_SIZE, initialPosition);
 
 		this.mapInstance = mapInstance;
 
@@ -58,5 +59,21 @@ class Asteroid extends MovableEntity {
 
 			Player.instance.score++;
 		}
+	}
+
+	lookAtPlayer () {
+		const diff = Player.instance.position.subtract(this.position);
+		this.setDirection(diff.rotate(90));
+	}
+
+	moveTowardsPlayer () {
+		const diff = Player.instance.position.subtract(this.position).normalize().scale(0.5);
+		this.position = this.position.add(diff);
+	}
+
+	frame () {
+		this.moveTowardsPlayer();
+		this.lookAtPlayer();
+		super.frame();
 	}
 }

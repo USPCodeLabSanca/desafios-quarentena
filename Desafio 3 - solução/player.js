@@ -1,5 +1,7 @@
 const ScoreTextElement = document.getElementById('score-text');
 const PLAYER_SIZE = 30;
+const WALKING_ANIMATION_FRAME_COUNT = 8;
+const TIME_BETWEEN_FRAMES = 100;
 
 /**
 * This is a class declaration
@@ -40,14 +42,26 @@ class Player extends MovableEntity {
 		this.mapInstance = mapInstance;
 		this.containerElement = containerElement;
 		this.gameOverFunction = gameOverFunction;
+		this.lastMousePosition = new Vector(0, -1);
+		this.currentWalkingAnimationFrame = 0;
+		this.lastFrameSwitchTimestamp = 0;
 
 		// This is so the map can execute the player's physics (see the `frame` function
 		// in the `map.js` file
 		mapInstance.addEntity(this);
 
-		// Assigns the player's image to it's element
-		this.rootElement.style.backgroundImage = "url('assets/player-0.png')";
-		this.rootElement.style.backgroundSize = this.size + 'px';
+		this.rootElement.classList.add('player');
+
+		// Creates all of the player's walking frames.
+		for (let i = 0; i < WALKING_ANIMATION_FRAME_COUNT; i ++) {
+			const imageElement = document.createElement('img');
+			imageElement.src = `./assets/player-${i}.png`;
+			imageElement.style.display = 'none';
+			imageElement.id = 'frame-' + i.toString();
+			this.rootElement.appendChild(imageElement);
+		}
+
+		this.setWalkingAnimationframe(0);
 
 		this.score = 0;
 
@@ -75,7 +89,7 @@ class Player extends MovableEntity {
 	* Instantiates a bullet in front of the player.
 	*/
 	shoot () {
-		new Bullet (this.containerElement, this.mapInstance, this.direction);
+		new Bullet (this.containerElement, this.mapInstance, this.position, this.direction);
 	}
 
 	/**
@@ -86,7 +100,65 @@ class Player extends MovableEntity {
 		this.gameOverFunction();
 	}
 
+	/**
+	* Function to update the last position of the mouse
+	* @argument { Vector } mousePosition
+	*/
 	updateMousePosition (mousePosition) {
-		this.setDirection(mousePosition);
+		this.lastMousePosition = mousePosition;
+		this.lookAtMouse();
+	}
+
+	/**
+	* Will make the player face at the last position the mouse was recorded to be
+	*/
+	lookAtMouse () {
+		const diff = this.lastMousePosition.subtract(this.position);
+		this.setDirection(diff);
+	}
+
+	/**
+	* Will set the current shown frame to be the frameIndex.
+	* @argument { number } frameIndex
+	*/
+	setWalkingAnimationframe (frameIndex) {
+		// Hides current frame
+		this.rootElement.querySelector('#frame-' + this.currentWalkingAnimationFrame).style.display = 'none';
+		this.currentWalkingAnimationFrame = frameIndex % WALKING_ANIMATION_FRAME_COUNT;
+		// Shows next frame
+		this.rootElement.querySelector('#frame-' + this.currentWalkingAnimationFrame).style.display = '';
+	}
+
+	/**
+	* Will move the player by offset
+	* @argument { Vector } offset
+	*/
+	move (offset) {
+		this.position = this.position.add(offset.normalize().scale(0.2));
+
+		// Prevents the player to walk too far away from the map
+		// Walking too far would activa the deletion mechanism in the map's frame,
+		// and that would be bad
+		if (this.distanceFromCenter() > 290) {
+			this.position = this.position.normalize().scale(290);
+		}
+
+		// Since the position changed, we have to update the player's rotation to
+		// face the mouse again
+		this.lookAtMouse();
+
+		// Now, handling the moving animation...
+
+		// Show next animation frame if it's been too long on the current frame.
+		if (Date.now() - this.lastFrameSwitchTimestamp > TIME_BETWEEN_FRAMES) {
+			this.setWalkingAnimationframe(this.currentWalkingAnimationFrame + 1);
+			this.lastFrameSwitchTimestamp = Date.now();
+		}
+
+		// This is to reset the player's animation if they stand for too long.
+		clearTimeout(this.walkingAnimationHandler);
+		this.walkingAnimationHandler = setTimeout(() => {
+			this.setWalkingAnimationframe(0);
+		}, 500);
 	}
 }

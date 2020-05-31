@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	user-select: none;
 }
 
 body, html {
@@ -39,6 +40,16 @@ body {
 }
 
 .movable-entity {
+	position: absolute;
+}
+
+.player {
+	position: relative;
+}
+
+.player > img {
+	width: 100%;
+	height: 100%;
 	position: absolute;
 }
 

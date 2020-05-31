@@ -17,6 +17,11 @@ const player = new Player(
 // This is the game frame function. It is responsible for updating everything in the game.
 function frame () {
 	map.frame();
+
+	if (pressedKeys['w'] || pressedKeys['ArrowUp']) player.move(new Vector(0, -1));
+	if (pressedKeys['a'] || pressedKeys['ArrowLeft']) player.move(new Vector(-1, 0));
+	if (pressedKeys['s'] || pressedKeys['ArrowDown']) player.move(new Vector(0, 1));
+	if (pressedKeys['d'] || pressedKeys['ArrowRight']) player.move(new Vector(1, 0));
 }
 
 // This is a dictionary that will hold the keys that are being held down at the time.
