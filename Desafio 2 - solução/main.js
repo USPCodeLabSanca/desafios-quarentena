@@ -172,7 +172,7 @@ class Map {
 	}
 
 	didPlayerWin () {
-		return this.visibleCells >= this.width * this.height - this.bombCount;
+		return this.visibleCells - STARTING_LIFE_COUNT + this.lives >= this.width * this.height - this.bombCount;
 	}
 
 	cellRightClick (clickedCell) {
