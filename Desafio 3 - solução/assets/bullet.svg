@@ -1,0 +1,7 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+	<path filter="url(#blurMe)" d='M 15 40 Q 0 50 15 60 L 85 60 Q 100 50 85 40 Z' fill="#144b9fdd"></path>
+
+	<filter id="blurMe">
+		<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+	</filter>
+</svg>
