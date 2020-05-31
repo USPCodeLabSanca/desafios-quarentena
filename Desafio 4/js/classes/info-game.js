@@ -1,3 +1,4 @@
+const INITIAL_DINAMITS = 1;
 const INFOGAME_SIZE = new Vector(399, 50);;
 /**
 * This is a class declaration
@@ -14,7 +15,7 @@ class InfoGame extends Entity {
 	*/
     static score = 0;
 	static level = 0;
-	static dinamits = 3;
+	static dinamits = INITIAL_DINAMITS;
     static rootElement;
 
 	constructor (containerElement) {

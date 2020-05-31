@@ -206,12 +206,14 @@ class Hook extends MovableEntity {
 		while(this.chains.length > 0) this.removeLastChain();
 
 		if (this.hookedObject) {
-			if (this.hookedObject instanceof Gold || this.hookedObject instanceof Rock) {
+			if (this.hookedObject instanceof Gold ||
+				this.hookedObject instanceof Rock || 
+				this.hookedObject instanceof Dinamit) {
+				
 				// Element was brought back! call the gold or rock delivery callback.
 				this.onObjectDelivered(this.hookedObject);
 			}
-
-			// removes forever the object that was pulled.
+        	// removes forever the object that was pulled.
 			this.hookedObject.delete();
 			this.hookedObject = null;
 		}
@@ -242,7 +244,7 @@ class Hook extends MovableEntity {
 	* allow for behavior extension.
 	*/
 	collided (object) {
-		if (object instanceof Gold || object instanceof Rock) {
+		if (object instanceof Gold || object instanceof Rock || object instanceof Dinamit) {
 			this.hookedObject = object;
 			this.hookedObject.offset = this.hookedObject.position.subtract(this.position);
 			this.pullBack();

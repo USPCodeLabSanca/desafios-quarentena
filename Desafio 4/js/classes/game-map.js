@@ -3,6 +3,7 @@ const FLOOR_HEIGHT = -100;
 
 const BASE_SCORE_FOR_NEXT_LEVEL = 5;
 const BASE_NUMBER_OF_ROCKS = 2;
+const BASE_NUMBER_OF_DINAMITS = 1;
 
 const STATE_PLAYING = 0;
 const STATE_LEVELUP = 1;
@@ -64,6 +65,10 @@ class GameMap extends Entity {
 		for (let i = 0; i < this.calculateNumberOfRocks(); i ++) {
 			this.generateItem('rock');
 		}
+
+		for (let i = 0; i < this.calculateNumberOfDinamits(); i ++) {
+			this.generateItem('dinamit');
+		}
 	}
 
 	nextLevel () {
@@ -112,6 +117,13 @@ class GameMap extends Entity {
 	}
 
 	/**
+	* calculates the number of dinamits the level should have
+	*/
+	calculateNumberOfDinamits () {
+		return BASE_NUMBER_OF_DINAMITS + this.level;
+	}
+
+	/**
 	* calculates the sum of the score of all existing gold in the map
 	*/
 	getCurrentGoldScoreInMap () {
@@ -148,12 +160,13 @@ class GameMap extends Entity {
 
 	/**
 	* Will generate either a rock element, or a gold element.
-	* @argument { 'rock' | 'gold' } itemType
+	* @argument { 'rock' | 'gold' | 'dinamit' } itemType
 	*/
 	generateItem (itemType) {
 		let element;
 		if (itemType === 'rock') element = new Rock(this.containerElement, Vector.zero);
 		else if (itemType === 'gold') element = new Gold(this.containerElement, Vector.zero);
+		else if (itemType === 'dinamit') element = new Dinamit(this.containerElement, Vector.zero);
 		else throw new Error(`Invalid item type '${itemType}'`);
 
 		// Checks if the new element is colliding with anything on the map
@@ -162,6 +175,8 @@ class GameMap extends Entity {
 			if (isCollidingWithRocks) return true;
 			const isCollidingWithGold = Gold.allGoldElements.some(gold => Entity.didEntitiesColide(gold, element));
 			if (isCollidingWithGold) return true;
+			const isCollidingWithDinammits = Dinamit.allDinamitElements.some(dinamit => Entity.didEntitiesColide(dinamit, element));
+			if (isCollidingWithDinammits) return true;
 			return false;
 		}
 
@@ -227,7 +242,7 @@ class GameMap extends Entity {
 		// No need to check for collision if the hook is being pulled back
 		if (hook.status === 'pulling') return;
 
-		const rockAndGoldEntities = Rock.allRockElements.concat(Gold.allGoldElements);
+		const rockAndGoldEntities = Rock.allRockElements.concat(Gold.allGoldElements).concat(Dinamit.allDinamitElements);
 
 		rockAndGoldEntities.forEach(entity => {
 			this.verifyForCollision(hook, entity);

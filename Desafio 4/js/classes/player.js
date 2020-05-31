@@ -1,3 +1,4 @@
+const INITIAL_DINAMIT = 1;
 const PLAYER_SIZE = new Vector(50, 50);
 
 /**
@@ -46,22 +47,24 @@ class Player extends Entity {
 	    this.score = 0;
 
 		// Will holde the player's dinamit amount
-		this.dinamits = 10;
+		this.dinamits = INITIAL_DINAMIT;
 
 		Player.instance = this;
-
 	}
 
 	/**
 	* This funtion will be called whenever the hook catches gold, and it updates the
 	* player's total score
-	* @argument { Gold | Rock } element
+	* @argument { Gold | Rock | Dinamit } element
 	*/
 	onHooked (element) {
 		if(element instanceof Gold)
 			this.score += element.calculateScore();
 		else if(element instanceof Rock)
 			this.score -= element.calculateScore();
+		else if(element instanceof Dinamit)
+			this.dinamits++;
+			InfoGame.atualizarDinamite(this.dinamits);
 
 		InfoGame.atualizaScore(this.score);
 		GameMap.instance.verifyIfLevelIsOver();
