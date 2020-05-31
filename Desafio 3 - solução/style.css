@@ -36,7 +36,8 @@ body {
 
 #movable-entity-container {
 	position: relative;
-	transform: translate(-50%, -50%);
+	width: 0;
+	height: 0;
 }
 
 .movable-entity {
