@@ -1,0 +1,329 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Vectors and dot products &#8212; Tutorials on imaging, computing and mathematics</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introducing principal component analysis" href="pca_introduction.html" />
+    <link rel="prev" title="Convolution" href="on_convolution.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="vectors-and-dot-products">
+<h1>Vectors and dot products<a class="headerlink" href="#vectors-and-dot-products" title="Permalink to this headline">¶</a></h1>
+<p>A vector is an ordered sequence of values:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{v} = [ v_1, v_2, \cdots v_n ] \\\end{split}\]</div>
+<div class="section" id="videos">
+<h2>Videos<a class="headerlink" href="#videos" title="Permalink to this headline">¶</a></h2>
+<p>See these Khan academy videos for nice introductions to vector dot products:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.khanacademy.org/math/linear-algebra/vectors_and_spaces/dot_cross_products/v/vector-dot-product-and-vector-length">mathematical properties of dot products</a>,</li>
+<li><a class="reference external" href="https://www.khanacademy.org/math/linear-algebra/vectors_and_spaces/dot_cross_products/v/vector-dot-product-and-vector-length">vector length</a>,</li>
+<li><a class="reference external" href="https://www.khanacademy.org/math/linear-algebra/matrix_transformations/lin_trans_examples/v/unit-vectors">unit vectors</a></li>
+</ul>
+</div>
+<div class="section" id="vector-scaling">
+<h2>Vector scaling<a class="headerlink" href="#vector-scaling" title="Permalink to this headline">¶</a></h2>
+<p>A vector can be <em>scaled</em> by a scalar <span class="math notranslate nohighlight">\(c\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[c \vec{v} \triangleq [ c v_1, c v_2, \cdots c v_n ]\]</div>
+</div>
+<div class="section" id="vector-addition">
+<h2>Vector addition<a class="headerlink" href="#vector-addition" title="Permalink to this headline">¶</a></h2>
+<p>Say we have two vectors containing <span class="math notranslate nohighlight">\(n\)</span> values:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{v} = [ v_1, v_2, \cdots v_n ] \\
+\vec{w} = [ w_1, w_2, \cdots w_n ]\end{split}\]</div>
+<p>Vector <em>addition</em> gives a new vector with <span class="math notranslate nohighlight">\(n\)</span> values:</p>
+<div class="math notranslate nohighlight">
+\[\vec{v} + \vec{w} \triangleq [ v_1 + w_1, v_2 + w_2, \cdots v_n + w_n ]\]</div>
+<p>Vector addition is commutative because <span class="math notranslate nohighlight">\(v_i + w_i = w_i + v_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\vec{v} + \vec{w} = \vec{w} + \vec{v}\]</div>
+</div>
+<div class="section" id="vector-dot-product">
+<span id="id1"></span><h2>Vector dot product<a class="headerlink" href="#vector-dot-product" title="Permalink to this headline">¶</a></h2>
+<p>The vector <em>dot product</em> is:</p>
+<div class="math notranslate nohighlight">
+\[\vec{v} \cdot \vec{w} \triangleq \Sigma_{i=1}^n v_i w_i\]</div>
+</div>
+<div class="section" id="vector-length">
+<span id="id2"></span><h2>Vector length<a class="headerlink" href="#vector-length" title="Permalink to this headline">¶</a></h2>
+<p>We write the <em>length</em> of a vector <span class="math notranslate nohighlight">\(\vec{v}\)</span> as <span class="math notranslate nohighlight">\(\VL{v}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\VL{v} \triangleq \sqrt{ \Sigma v_i^2 }\]</div>
+<p>This is a generalization of Pythagoras’ theorem to <span class="math notranslate nohighlight">\(n\)</span> dimensions.  For
+example, the length of a two dimensional vector <span class="math notranslate nohighlight">\([ x, y ]\)</span> is the length of the
+hypotenuse of the right-angle triangle formed by the points <span class="math notranslate nohighlight">\((x, 0), (0, y),
+(x, y)\)</span>.  This length is <span class="math notranslate nohighlight">\(\sqrt{x^2 + y^2}\)</span>.  For a point in three dimensions
+<span class="math notranslate nohighlight">\({x, y, z}\)</span>, consider the right-angle triangle formed by <span class="math notranslate nohighlight">\((x, y, 0), (0, 0,
+z), (x, y, z)\)</span>.  The hypotenuse is length <span class="math notranslate nohighlight">\(\sqrt{\L{ [ x, y ] }^2 + z^2} =
+\sqrt{ x^2 + y^2 + z^2 }\)</span>.</p>
+<p>From the definition of vector length and the dot product, the square root of
+the dot product of the vector with itself gives the vector length:</p>
+<div class="math notranslate nohighlight">
+\[\VL{v} = \sqrt{ \vec{v} \cdot \vec{v} }\]</div>
+</div>
+<div class="section" id="properties-of-dot-products">
+<span id="dot-product-properties"></span><h2>Properties of dot products<a class="headerlink" href="#properties-of-dot-products" title="Permalink to this headline">¶</a></h2>
+<p>We will use the results from <a class="reference internal" href="some_sums.html"><span class="doc">Some algebra with summation</span></a>.</p>
+<div class="section" id="commutative">
+<h3>Commutative<a class="headerlink" href="#commutative" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\vec{v} \cdot \vec{w} = \vec{w} \cdot \vec{v}\]</div>
+<p>because <span class="math notranslate nohighlight">\(v_i w_i = w_i v_i\)</span>.</p>
+</div>
+<div class="section" id="distributive-over-vector-addition">
+<h3>Distributive over vector addition<a class="headerlink" href="#distributive-over-vector-addition" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\vec{v} \cdot (\vec{w} + \vec{x}) = \vec{v} \cdot \vec{w} + \vec{v} \cdot
+\vec{x}\]</div>
+<p>because:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{v} \cdot (\vec{w} + \vec{x}) = \\
+\Sigma{ v_i ( w_i + x_i) } = \\
+\Sigma{ (v_i + w_i) } + \Sigma{ (v_i + x_i) } = \\
+\vec{v} \cdot \vec{w} + \vec{v} \cdot \vec{x}\end{split}\]</div>
+</div>
+<div class="section" id="scalar-multiplication">
+<h3>Scalar multiplication<a class="headerlink" href="#scalar-multiplication" title="Permalink to this headline">¶</a></h3>
+<p>Say we have two scalars, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[(c \vec{v}) \cdot (d \vec{w}) = c d ( \vec{v} \cdot \vec{w} )\]</div>
+<p>because:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(c \vec{v}) \cdot (d \vec{w}) = \\
+\Sigma{ c v_i d w_i } = \\
+c d \Sigma{ v_i w_i }\end{split}\]</div>
+<p>From the properties of distribution over addition and scalar multiplication:</p>
+<div class="math notranslate nohighlight">
+\[\vec{v} \cdot (c \vec{w} + \vec{x}) = c (\vec{v} \cdot \vec{w}) + (\vec{v}
+\cdot \vec{x})\]</div>
+<p>See: <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product#Properties">properties of dot products</a>.</p>
+</div>
+</div>
+<div class="section" id="unit-vector">
+<h2>Unit vector<a class="headerlink" href="#unit-vector" title="Permalink to this headline">¶</a></h2>
+<p>A unit vector is any vector with length 1.</p>
+<p>To make a corresponding unit vector from any vector <span class="math notranslate nohighlight">\(\vec{v}\)</span>, divide by
+<span class="math notranslate nohighlight">\(\VL{v}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\vec{u} = \frac{1}{ \VL{v} } \vec{v}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(g \triangleq \frac{1}{\VL{v}}\)</span>.  Then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\L{ g \vec{v} }^2 = \\
+( g \vec{v} ) \cdot ( g \vec{v} ) = \\
+g^2  \VL{v}^2 = 1\end{split}\]</div>
+</div>
+<div class="section" id="if-two-vectors-are-perpendicular-their-dot-product-is-0">
+<span id="orthogonal-dot"></span><h2>If two vectors are perpendicular, their dot product is 0<a class="headerlink" href="#if-two-vectors-are-perpendicular-their-dot-product-is-0" title="Permalink to this headline">¶</a></h2>
+<p>I based this proof on that in Gilbert Strang’s “Introduction to Linear
+Algebra” 4th edition, page 14.</p>
+<p>Consider the triangle formed by the two vectors <span class="math notranslate nohighlight">\(\vec{v}\)</span> and <span class="math notranslate nohighlight">\(\vec{w}\)</span>.  The
+lengths of the sides of the triangle are <span class="math notranslate nohighlight">\(\VL{v}, \VL{w}, \L{\vec{v} -
+\vec{w}}\)</span>.  When <span class="math notranslate nohighlight">\(\vec{v}\)</span> and <span class="math notranslate nohighlight">\(\vec{w}\)</span> are perpendicular, this is a
+right-angled triangle with hypotenuse length <span class="math notranslate nohighlight">\(\L{\vec{v} - \vec{w}}\)</span>.  In this
+situation, by Pythagoras:</p>
+<div class="math notranslate nohighlight">
+\[\VL{v}^2 + \VL{w}^2 = \L{\vec{v} - \vec{w}}^2\]</div>
+<p>Write the left hand side as:</p>
+<div class="math notranslate nohighlight">
+\[\VL{v}^2 + \VL{w}^2 =
+v_1^2 + v_2^2 + \cdots v_n^2 +
+w_1^2 + w_2^2 + \cdots w_n^2\]</div>
+<p>Write the right hand side as:</p>
+<div class="math notranslate nohighlight">
+\[\L{\vec{v} - \vec{w}}^2 =
+(v_1^2 - 2v_1 w_1 + w_1^2) +
+(v_2^2 - 2v_2 w_2 + w_2^2) +
+\cdots
+(v_n^2 - 2v_n w_1 + w_n^2)\]</div>
+<p>The <span class="math notranslate nohighlight">\(v_i^2\)</span> and <span class="math notranslate nohighlight">\(w_i^2\)</span> terms on left and right cancel, so:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\VL{v}^2 + \VL{w}^2 = \L{\vec{v} - \vec{w}}^2 \implies \\
+0 = 2(v_1 w_1 + v_2 w_2 + \cdots v_n w_n) \implies \\
+0 = \vec{v} \cdot \vec{w}\end{split}\]</div>
+<p>By the <a class="reference external" href="https://en.wikipedia.org/wiki/Pythagorean_theorem#Converse">converse of Pythagoras’ theorem</a>, if <span class="math notranslate nohighlight">\(\VL{v}^2 +
+\VL{w}^2 \ne \L{\vec{v} - \vec{w}}^2\)</span> then vectors <span class="math notranslate nohighlight">\(\vec{v}\)</span> and <span class="math notranslate nohighlight">\(\vec{w}\)</span> do
+not form a right angle and are not perpendicular.</p>
+</div>
+<div class="section" id="also-see">
+<h2>Also see<a class="headerlink" href="#also-see" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="vector_projection.html"><span class="doc">Vector projection</span></a>;</li>
+<li><a class="reference internal" href="vector_angles.html"><span class="doc">Angles between vectors</span></a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Teaching</a></h1>
+
+
+
+<p class="blurb">Teaching</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="angle_sum.html">The angle sum rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bonferroni_correction.html">Notes on the Bonferroni threshold</a></li>
+<li class="toctree-l1"><a class="reference internal" href="correlated_regressors.html">Correlated regressors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fdr.html">Thresholding with false discovery rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating_point.html">Points on floats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating_error.html">Floating point error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_basis.html">The Fourier basis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_no_ei.html">Fourier without the ei</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_no_ei_orig.html">Fourier without the ei</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm_intro.html">Introduction to the general linear model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html">The argument in “Why most published research findings are false”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#the-practice-of-science-is-profoundly-broken-discuss-no-model-and-test">“The practice of science is profoundly broken”. Discuss? - no - model and test!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#different-ways-of-phrasing-the-argument">Different ways of phrasing the argument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#some-terms">Some terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#what-does-a-significant-statistical-test-result-tell-us">What does a “significant” statistical test result tell us?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#what-is-a-finding-that-is-likely-to-be-true">What is a finding that is likely to be true?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#whether-a-finding-is-likely-to-be-true-depends-on-the-power-of-the-experiment">Whether a finding is likely to be true depends on the power of the experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#quantifying-the-effect-of-bias">Quantifying the effect of bias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#the-effect-of-multiple-studies">The effect of multiple studies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioannidis_2005.html#putting-it-together">Putting it together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutual_information.html">Mutual information as an image matching metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizing_space.html">Calculating transformations between images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on_convolution.html">Convolution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vectors and dot products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#videos">Videos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-scaling">Vector scaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-addition">Vector addition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-dot-product">Vector dot product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-length">Vector length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#properties-of-dot-products">Properties of dot products</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commutative">Commutative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distributive-over-vector-addition">Distributive over vector addition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scalar-multiplication">Scalar multiplication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#unit-vector">Unit vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#if-two-vectors-are-perpendicular-their-dot-product-is-0">If two vectors are perpendicular, their dot product is 0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#also-see">Also see</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pca_introduction.html">Introducing principal component analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_complex.html">Refresher on complex numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slice_timing.html">Slice timing correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smoothing_intro.html">An introduction to smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smoothing_as_convolution.html">Smoothing as convolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="some_sums.html">Some algebra with summation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sums_of_cosines.html">Sum of sines and cosines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sums_of_sinusoids.html">Sums of sinusoids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random_fields.html">Thresholding with random field theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Teaching repo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rotation_2d.html">Formula for rotating a vector in 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector_projection.html">Vector projection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector_angles.html">Angles between vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="correlation_projection.html">Correlation and projection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_rank.html">Matrix rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_interpolation.html">Linear interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on_cdfs.html">p values from cumulative distribution functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions_are_objects.html">Functions are objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_scope.html">Global and local scope of Python variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="brisk_python.html">Brisk introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string_formatting.html">Inserting values into strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on_loops.html">“for” and “while”, “break” and “else:”</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="http://matthew.dynevor.org">Home page</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="on_convolution.html" title="previous chapter">Convolution</a></li>
+      <li>Next: <a href="pca_introduction.html" title="next chapter">Introducing principal component analysis</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/on_vectors.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

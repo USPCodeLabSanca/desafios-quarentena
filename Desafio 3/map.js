@@ -185,7 +185,7 @@ class Map {
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
 			
 			// create the asteroid
-			//new Asteroid(this.containerElement, this, position);
+			new Asteroid(this.containerElement, this, position);
 		}
 		
 		if (this.shouldBonusSpawn()) {
@@ -193,7 +193,7 @@ class Map {
 			const position = new Vector(Math.random() - 0.5, Math.random() - 0.5).normalize().scale(299);
 			
 			// create the bonus
-			//new Bonus(this.containerElement, this, position);
+			new Bonus(this.containerElement, this, position);
 		}
 }
 }

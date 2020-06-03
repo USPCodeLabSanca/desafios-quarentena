@@ -1,5 +1,7 @@
 # Desafio #3 - Asteroids
 
+[![Play Here](https://api.netlify.com/api/v1/badges/d9bc1b3a-3f4f-4bd5-bcff-38d9ebff58cd/deploy-status)](https://app.netlify.com/sites/quarenter01/deploys)
+
 <img src="assets/demo.png">
 
 ## Contexto
