@@ -1,6 +1,7 @@
 # Desafio #3 - Asteroids
 
-[![Play Here](https://api.netlify.com/api/v1/badges/d9bc1b3a-3f4f-4bd5-bcff-38d9ebff58cd/deploy-status)](https://app.netlify.com/sites/quarenter01/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f8a62ffc-48e9-4da1-9b06-38f400ce1aef/deploy-status)](https://quarenter01.netlify.app)</br>
+<a href="https://quarenter01.netlify.app">Play Online Space Ship</a>
 
 <img src="assets/demo.png">
 
