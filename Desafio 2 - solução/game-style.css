@@ -1,0 +1,63 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#hud {
+	height: max-content;
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	font-size: 32px;
+}
+
+#hud > img {
+	height: 30px;
+	width: 30px;
+	margin-right: 8px;
+}
+
+#root {
+	display: grid;
+	justify-content: center;
+	justify-items: center;
+	align-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.cell {
+	width: 15px;
+	height: 15px;
+	border: 1px solid black;
+	user-select: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-size: cover;
+}
+
+.hidden {
+	cursor: pointer;
+	background-color: lightslategray;
+}
+
+.bomb {
+	background-image: url('assets/bomb.png');
+}
+
+.flag {
+	background-image: url('assets/flag.png');
+}
+
+.revealed {
+	cursor: default;
+}
