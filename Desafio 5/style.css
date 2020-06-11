@@ -16,21 +16,23 @@ body, html {
 	justify-content: center;
 }
 
-#arena-line {
-	height: 500px;
-	width: 500px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: 1px solid black;
-	border-radius: 100%;
+.grid {
+	display: grid;
+	width: 100%;
+	height: 100%;
 }
 
-#movable-entity-container {
+.candy {
+	border: 2px solid black;
+	border-radius: 16px;
+	cursor: pointer;
 	position: relative;
-	transform: translate(-50%, -50%);
+	left: 0;
+	top: 0;
+	margin: 4px;
+	transition: 200ms border;
 }
 
-.movable-entity, .entity {
-	position: absolute;
+.highlighted {
+	border: 6px solid red;
 }
