@@ -287,6 +287,7 @@ class Grid {
 	* @argument { Candy } candy
 	*/
 	async explodeCandy (candy) {
+		Dashboard.candyMachted.push(candy);
 		await candy.explode();
 		this.contents[candy.row][candy.column] = null;
 	}
