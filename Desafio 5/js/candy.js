@@ -2,14 +2,17 @@
 * This is a simple collection of possible colors the candy can take.
 * @type { ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'gray'] }
 */
-const CandyColors = [
+let CandyColors = [
 	'red',
 	'green',
 	'blue',
+	'black',
+];
+
+let BlockedCandyColors = [
 	'yellow',
 	'magenta',
 	'cyan',
-	'black',
 ];
 
 /**
@@ -50,6 +53,7 @@ class Candy {
 		containerElement.appendChild(element);
 		this.rootElement = element;
 
+		this.block = false;
 		this.row = row;
 		this.column = column;
 		this.type = type;
@@ -84,7 +88,8 @@ class Candy {
 
 	/** Will automatically update the candy's border color, whenever it's type changes */
 	set type (newType) {
-		//this.rootElement.style.borderColor = CandyColors[newType];
+		if(CandyColors[newType] === 'black')
+			this.block = true;
 		this.rootElement.style.backgroundColor = CandyColors[newType];
 		this._type = newType;
 	}
@@ -138,6 +143,7 @@ class Candy {
 	*/
 	async explode () {
 		await sleep(100);
+		Dashboard.candyMachted.push(this);
 		this.rootElement.remove();
 	}
 }
