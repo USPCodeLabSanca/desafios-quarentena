@@ -6,7 +6,10 @@
 
 Um grupo de Hackers invadiu os servidores do Candy Crush, e roubaram todos os doces! Ajudem o CodeLab a recuperar os doces perdidos!
 
-Você pode ver o jogo <a href="https://bejeweled-codelab.netlify.app/">aqui</a>.
+## Math-O5: Minha solução
+Você pode ver o jogo <a href="https://candygame.netlify.app/">Minha Versão 1.0</a>.
+
+Você pode ver o jogo <a href="https://bejeweled-codelab.netlify.app/">Versão Original</a>.
 
 ## Desafios
 

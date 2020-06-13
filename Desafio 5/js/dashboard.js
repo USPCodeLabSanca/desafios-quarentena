@@ -1,5 +1,5 @@
-const MAX_TIME = 5000; // 60 seconds 
-const MIN_TIME = 5000; // 10 secons
+const MAX_TIME = 50000; // 60 seconds 
+const MIN_TIME = 15000; // 10 secons
 
 class Dashboard {
     

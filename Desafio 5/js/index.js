@@ -15,8 +15,8 @@ function gameOver () {
 	// The button reload
 	let reloadButton = document.createElement('div');
 	reloadButton.classList.add('reload');
-	// reloadButton.style.zIndex = 3;
-	reloadButton.innerHTML = '<img src="./../Desafio%205/assets/reload.png"></img>';
+	reloadButton.style.zIndex = 3;
+	reloadButton.innerHTML = '<img src="./assets/reload.png"></img>';
 	reloadButton.addEventListener('click', () => {
 			window.location.reload();
 	});
