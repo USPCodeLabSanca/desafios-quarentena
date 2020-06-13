@@ -1,18 +1,22 @@
 /**
 * This is a simple collection of possible colors the candy can take.
-* @type { ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'gray'] }
+* @type { ['blue', 'magenta', 'orange', 'black'] }
 */
 let CandyColors = [
-	'red',
-	'green',
 	'blue',
+	'magenta',
+	'orange',
 	'black',
 ];
 
+/**
+* This is a simple collection of possible colors the candy can take ON UNLOCK level.
+* @type { [cyan', 'green', 'purple'] }
+*/
 let BlockedCandyColors = [
-	'yellow',
-	'magenta',
 	'cyan',
+	'green',
+	'purple',
 ];
 
 /**
@@ -145,5 +149,18 @@ class Candy {
 		await sleep(100);
 		Dashboard.candyMachted.push(this);
 		this.rootElement.remove();
+	}
+
+	/**
+	 * This is called to UNLOCK a new type of candy
+	 * If all candy are unlock, the it will do nothing.
+	 */ 
+	static unlockCandy() {
+		const candys = BlockedCandyColors.length;
+
+		if(candys) {
+			CandyColors.push(BlockedCandyColors[candys-1]);
+			BlockedCandyColors.pop();
+		}
 	}
 }
