@@ -138,7 +138,7 @@ class Grid {
 	*/
 	onClick (candy) {
 		// Te player will usually be unable to play whenever an animation is running.
-		if (this.canPlayerPlay === false) return;
+		if (this.canPlayerPlay === false || candy.isForbidden()) return;
 
 		// If there was no previously selected candy, select the clicked one.
 		if (!this.selectedCandy) {

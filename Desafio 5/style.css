@@ -49,7 +49,8 @@ body, html {
 }
 
 .highlighted {
-	border: 6px solid red;
+	z-index: 2;
+	border: 7px solid red;
 }
 
 

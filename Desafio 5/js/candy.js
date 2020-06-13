@@ -1,6 +1,6 @@
 /**
 * This is a simple collection of possible colors the candy can take.
-* @type { ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan'] }
+* @type { ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'gray'] }
 */
 const CandyColors = [
 	'red',
@@ -9,6 +9,7 @@ const CandyColors = [
 	'yellow',
 	'magenta',
 	'cyan',
+	'black',
 ];
 
 /**
@@ -83,7 +84,8 @@ class Candy {
 
 	/** Will automatically update the candy's border color, whenever it's type changes */
 	set type (newType) {
-		this.rootElement.style.borderColor = CandyColors[newType];
+		//this.rootElement.style.borderColor = CandyColors[newType];
+		this.rootElement.style.backgroundColor = CandyColors[newType];
 		this._type = newType;
 	}
 
@@ -124,6 +126,10 @@ class Candy {
 		this.rootElement.style.transition = ''; // Prevents animation
 		this.rootElement.style.top = '';
 		this.rootElement.style.left = '';
+	}
+
+	isForbidden() {
+		return (CandyColors[this.type] === 'black')? true : false;
 	}
 
 	/**
