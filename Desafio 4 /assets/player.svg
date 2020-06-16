@@ -1,0 +1,10 @@
+<svg width="119" height="178" xmlns="http://www.w3.org/2000/svg">
+	<rect fill="#fff" id="canvas_background" height="180" width="121" y="-1" x="-1"/>
+	<rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+	<ellipse ry="44.285352" rx="35.356854" id="svg_2" cy="83.606461" cx="59.320946" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#fff"/>
+	<ellipse ry="25.356936" rx="25.356936" id="svg_1" cy="26.106932" cx="59.320953" stroke-width="1.5" stroke="#000" fill="#fff"/>
+	<rect id="svg_4" height="25.714076" width="117.1419" y="102.177739" x="0.750002" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#fff"/>
+	<rect id="svg_5" height="49.285311" width="14.999877" y="127.891813" x="51.821017" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#fff"/>
+	<ellipse stroke="#000" ry="3.571399" rx="4.89965" id="svg_14" cy="22.40311" cx="50.420751" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#fff"/>
+	<ellipse stroke="#000" ry="3.571399" rx="4.89965" id="svg_16" cy="22.403112" cx="69.934846" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#fff"/>
+</svg>

@@ -138,7 +138,7 @@ class Grid {
 	*/
 	onClick (candy) {
 		// Te player will usually be unable to play whenever an animation is running.
-		if (this.canPlayerPlay === false || candy.isForbidden()) return;
+		if (this.canPlayerPlay === false) return;
 
 		// If there was no previously selected candy, select the clicked one.
 		if (!this.selectedCandy) {
@@ -292,37 +292,11 @@ class Grid {
 	}
 
 	/**
-	* This function will explode all found matches. 
-	* It can explode all black blocks if 6 blocks or more is matched. 
+	* This function will explode all found matches.
 	* @returns { boolean } Whether any explosions occurred or not.
 	*/
 	async explodeAll () {
-		let explosions = this.findAllPossibleExplosions();
-
-		// Bonus -> if you explode more than 6 blocks in a row,
-		// then all blacks blocks will be deleted.
-		if(explosions.length >= 6) {
-			explosions.push(this.findAllBlacks());
-		}
-
-		const results = await Promise.all(
-			explosions.map(async explosion => {
-				await Promise.all(
-					explosion.map(candy => this.explodeCandy(candy))
-				);
-				return true;
-			})
-		);
-		return results.some(e => e);
-	}
-
-	/** 
-	* Bonus Advantege
-	* This function will explode all black "bad" blocks.
-	* @returns { boolean } Whether any explosions occurred or not.
-	*/
-	async explodeAllBlacks () {
-		const explosions = this.findAllBlacks();
+		const explosions = this.findAllPossibleExplosions();
 
 		const results = await Promise.all(
 			explosions.map(async explosion => {
@@ -352,24 +326,6 @@ class Grid {
 		return explosions;
 	}
 
-		/**
-	* Returns all matches currentyl on the grid.
-	* @returns { Candy[][]}
-	*/
-	findAllBlacks () {
-		let explosions = [];
-		for (let row = 0; row < this.rows; row ++) {
-			for (let column = 0; column < this.columns; column ++) {
-				const candy = this.contents[row][column];
-				if (!candy) continue;
-				if(candy.block) {
-					explosions.push(candy);
-				}
-			}
-		}
-		return explosions;
-	}
-	
 	/**
 	* Returns the largest match around a candy.
 	* @argument { Candy } candy

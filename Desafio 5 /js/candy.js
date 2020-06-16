@@ -1,22 +1,14 @@
 /**
 * This is a simple collection of possible colors the candy can take.
-* @type { ['blue', 'magenta', 'orange', 'black'] }
+* @type { ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan'] }
 */
-let CandyColors = [
-	'blue',
-	'magenta',
-	'orange',
-	'black',
-];
-
-/**
-* This is a simple collection of possible colors the candy can take ON UNLOCK level.
-* @type { [cyan', 'green', 'purple'] }
-*/
-let BlockedCandyColors = [
-	'cyan',
+const CandyColors = [
+	'red',
 	'green',
-	'purple',
+	'blue',
+	'yellow',
+	'magenta',
+	'cyan',
 ];
 
 /**
@@ -57,7 +49,6 @@ class Candy {
 		containerElement.appendChild(element);
 		this.rootElement = element;
 
-		this.block = false;
 		this.row = row;
 		this.column = column;
 		this.type = type;
@@ -92,9 +83,7 @@ class Candy {
 
 	/** Will automatically update the candy's border color, whenever it's type changes */
 	set type (newType) {
-		if(CandyColors[newType] === 'black')
-			this.block = true;
-		this.rootElement.style.backgroundColor = CandyColors[newType];
+		this.rootElement.style.borderColor = CandyColors[newType];
 		this._type = newType;
 	}
 
@@ -137,30 +126,12 @@ class Candy {
 		this.rootElement.style.left = '';
 	}
 
-	isForbidden() {
-		return (CandyColors[this.type] === 'black')? true : false;
-	}
-
 	/**
 	* Function called then the candy is to delete itself, after being matched with
 	* other candy.
 	*/
 	async explode () {
 		await sleep(100);
-		Dashboard.candyMachted.push(this);
 		this.rootElement.remove();
-	}
-
-	/**
-	 * This is called to UNLOCK a new type of candy
-	 * If all candy are unlock, the it will do nothing.
-	 */ 
-	static unlockCandy() {
-		const candys = BlockedCandyColors.length;
-
-		if(candys) {
-			CandyColors.push(BlockedCandyColors[candys-1]);
-			BlockedCandyColors.pop();
-		}
 	}
 }
