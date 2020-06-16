@@ -1,0 +1,38 @@
+* {
+	box-sizing: border-box;
+}
+
+body, html {
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+#root {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.grid {
+	display: grid;
+	width: 100%;
+	height: 100%;
+}
+
+.candy {
+	border: 2px solid black;
+	border-radius: 16px;
+	cursor: pointer;
+	position: relative;
+	left: 0;
+	top: 0;
+	margin: 4px;
+	transition: 200ms border;
+}
+
+.highlighted {
+	border: 6px solid red;
+}
