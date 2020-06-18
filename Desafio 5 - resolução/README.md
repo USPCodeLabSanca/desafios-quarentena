@@ -1,15 +1,16 @@
 # Desafio #5 - Candy Crush
 
+## Solução
+Minha solução <a href="https://candygame.netlify.app/">Versão 1.0</a>.
+
+## Jogo
+Você pode ver o jogo <a href="https://bejeweled-codelab.netlify.app/">Versão Original</a>.
+
 <img src='https://i.imgur.com/BXpVzlH.png'>
 
 ## Contexto
 
 Um grupo de Hackers invadiu os servidores do Candy Crush, e roubaram todos os doces! Ajudem o CodeLab a recuperar os doces perdidos!
-
-## Math-O5: Minha solução
-Você pode ver o jogo <a href="https://candygame.netlify.app/">Minha Versão 1.0</a>.
-
-Você pode ver o jogo <a href="https://bejeweled-codelab.netlify.app/">Versão Original</a>.
 
 ## Desafios
 
