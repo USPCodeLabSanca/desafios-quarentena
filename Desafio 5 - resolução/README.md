@@ -1,6 +1,6 @@
 # Desafio #5 - Candy Crush
 
-## Solução
+## Solução (apenas em navegadores Chrome)
 Minha solução <a href="https://candygame.netlify.app/">Versão 1.0</a>.
 
 ## Jogo
