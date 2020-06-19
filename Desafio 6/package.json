@@ -1,0 +1,15 @@
+{
+  "name": "desafio-6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "javascript/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node javascript/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.50.0"
+  }
+}
