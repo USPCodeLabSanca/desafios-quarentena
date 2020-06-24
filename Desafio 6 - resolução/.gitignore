@@ -1,3 +1,4 @@
 node_modules/
+**/config.js
 
 # Add your Access Token file here.
