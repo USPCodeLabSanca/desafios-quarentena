@@ -2,14 +2,7 @@ process.env.NTBA_FIX_319 = true; // Silences an annoying error message.
 const TelegramBot = require('node-telegram-bot-api');
 const jokempo = require('./jokempo');
 const randomPhrases = require('./random-phrases');
-
-// replace the value below with the Telegram token you receive from @BotFather
-const token = 'YOUR ACCESS TOKEN HERE';
-
-if (token === 'YOUR ACCESS TOKEN HERE') {
-	console.log('You forgot to replate the access token!!! Properly read the README before continuing >:(');
-	process.exit(-1);
-}
+const token = require('./config').GLOBAL_TOKEN;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
