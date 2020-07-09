@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css">
+	<title>Document</title>
+</head>
+<body>
+	<!-- The template tag is used to -->
+	<template id="message-template">
+		<div class="message-container">
+			<div class="message-name"></div>
+			<div class="message-text"></div>
+		</div>
+	</template>
+	<header>
+		Group Chat
+	</header>
+	<main>
+		<div id="messages-container"></div>
+		<form id="message-form">
+			<input type="text" name="message-value" id="message_input">
+			<button type="submit">send</button>
+		</form>
+	</main>
+	<script src="./adjectives.js"></script>
+	<script src="./animals.js"></script>
+	<script src="./colors.js"></script>
+	<script src="./index.js"></script>
+</body>
+</html>
