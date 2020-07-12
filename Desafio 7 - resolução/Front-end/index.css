@@ -1,0 +1,92 @@
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	height: 10vh;
+	box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 16px;
+	font-size: 24px;
+}
+
+main {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+#info-user-container {
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: #cdf5e1;
+	position: fixed;
+	height: 100%;
+	overflow: auto;
+  }
+
+  #info-user-container button {
+	padding: 10px;
+	width: 100%;	
+	background-color: #b5d9fa;
+	border: none;
+  }
+  
+#messages-container {
+	height: 100%;
+	overflow-y: none;
+	margin-left: 250px;
+	padding: 8px 4px;
+	display: flex;
+	flex-direction: column;
+
+}
+
+#message-form {
+	border-top: 1px solid black;
+	display: flex;
+	margin-left: 220px;
+	padding: 30px 0px;
+}
+
+#message-form > input{
+	width: 100%;
+	padding: 10px;
+}
+
+#message-form button {
+	padding: 0px 30px;
+}
+.message-container {
+	border: 1px solid black;
+	border-radius: 16px;
+	padding: 4px 8px;
+	height: max-content;
+	max-width: 75%;
+	width: max-content;
+	margin: 8px 0;
+	padding: 8px 4px;
+}
+
+.message-name {
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.message-text {
+	font-size: 18px;
+}

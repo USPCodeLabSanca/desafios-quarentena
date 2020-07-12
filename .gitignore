@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *.zip
 **/*.zip
 /Desafio 3 - solução
@@ -11,7 +10,6 @@
 /Desafio\ 3\ \ -\ \ solução/
 /Desafio\ 4\ \ -\ \ solução/
 /Desafio\ 5\ \ -\ \ solução/
-# /Desafio\ 5\ \ -\ \ resolução/
-=======
+/Desafio\ 6\ \ -\ \ solução/
+/Desafio\ 7\ \ -\ \ solução/
 node_modules/
->>>>>>> c940d2e043bb84bff14ddadd09397ae792db05ff
