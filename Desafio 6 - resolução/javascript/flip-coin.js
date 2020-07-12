@@ -41,7 +41,7 @@ function whoWon (playerChoice, botCoin) {
 }
 
 /**
-* This function will initiate the jokempo game.
+* This function will initiate the start game.
 * @argument { import('node-telegram-bot-api') } bot
 * @argument { number } chatId
 */
@@ -49,14 +49,16 @@ async function startPlaying (bot, chatId) {
 	
 	await bot.sendMessage(chatId, 'Legal! vamos jogar! A moeda foi lançada');
 	await sleep(300);
-	
 	await bot.sendMessage(chatId, 'Escolha Cara ou Coroa!!');
 
+	// Changes state to waiting player make a move
 	isPlayingHeadTail = true;
-	await sleep(500);
+	
+	// choice the answer
 	botCoin = flipCoin();
-	await bot.sendMessage(chatId, botCoin + '!!!');
-	await sleep(1500);
+	await sleep(2500);
+
+	// if the state is waiting a moving, then the player is cheating
 	if (isPlayingHeadTail) {
 		isPlayingHeadTail = false;
 		await bot.sendMessage(chatId, 'Você demorou demais! Você está tentando trapacear?');
@@ -74,9 +76,9 @@ async function startPlaying (bot, chatId) {
 function readUserResponse (bot, chatId, message) {
 	const winner = whoWon(message, botCoin);
 	const response = {
-		'player': 'Você ganhou! Parabens!',
-		'bot': 'Opa! Essa eu ganhei! Boa sorte na próxima!',
-		'tie': 'Parece que empatamos! Mas o jogo ainda foi divertido.',
+		'player': 'Você ganhou! Parabens!\n' + botCoin + '!!!',
+		'bot': 'Opa! Essa eu ganhei! Boa sorte na próxima!\n' + botCoin + '!!!',
+		'tie': 'Parece que empatamos! Mas o jogo ainda foi divertido.\n' + botCoin + '!!!',
 	}[winner] || `Eu só entendo 'cara', 'coroa'!!!!`;
 	bot.sendMessage(chatId, response);
 	isPlayingHeadTail = false;

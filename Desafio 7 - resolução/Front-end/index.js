@@ -56,6 +56,23 @@ myself = (() => {
 	return newMyself;
 })();
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"];
+
+/**
+ * Calcula a data e format MM DD, YYYY
+ * @returns { string } The actual date
+ */
+function answerDate() {
+    let date  = new Date();
+    let month = monthNames[date.getMonth()];
+    let day   = String(date.getDate()).padStart(2, '0');
+	let year  = date.getFullYear();
+	let hour = date.getHours();
+	let minute = date.getMinutes();
+    return month + ' ' + day  + ',' + year + ': ' + hour + ':' + minute;
+}
+
 // Function executed when the user "sends" the message
 /**
  * This is an event. It fires when the user press send. Then, it identify the user who press the button,
@@ -64,11 +81,14 @@ myself = (() => {
 messageFormElement.addEventListener('submit', event => {
 	event.preventDefault();
 
+	const data = answerDate();
+	
 	// Selects the input from the form
 	const messageElement = messageFormElement.querySelector('input[name=message-value]');
 	const messageText = messageElement.value;
 	if (!messageText) return;
-	const message = { text: messageText, sender: myself };
+	const message = { text: messageText, sender: myself, when: data };
+	console.log(data);
 	sendMessageToServer(message);
 
 	// Clears the message text input
@@ -116,7 +136,7 @@ function createMessageOnUI (message) {
 	const messageNameElement = messageNode.querySelector('.message-name');
 	const messageTextElement = messageNode.querySelector('.message-text');
 
-	messageNameElement.innerText = message.sender.name;
+	messageNameElement.innerHTML = '<p>' + message.when + '</p>' + ' ' + '<h3>' + message.sender.name + '<\h3>';
 	messageNameElement.style.color = message.sender.color;
 	messageTextElement.innerText = message.text;
 

@@ -107,7 +107,6 @@ const colors = [
 	'slateblue',
 	'slategray',
 	'slategrey',
-	'snow',
 	'springgreen',
 	'steelblue',
 	'tan',

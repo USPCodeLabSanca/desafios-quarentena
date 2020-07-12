@@ -13,3 +13,5 @@
 /Desafio\ 6\ \ -\ \ solução/
 /Desafio\ 7\ \ -\ \ solução/
 node_modules/
+**/*.txt
+*.txt

@@ -1,5 +1,9 @@
 # Desafio #6 - Chat Bot
 
+# Bot desenvolvido
+
+@Segura Esse Bot
+
 ## Atenção
 
 Este projeto não é mais uma página web. Ele é um projeto em Node.js. Para executar esse projeto, é preciso ter instalado o Node.
